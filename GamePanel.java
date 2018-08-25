@@ -231,7 +231,7 @@ public class GamePanel extends JPanel
                     filer.setControlButtonsAreShown(false);
                     //filer.setFileView();
                     saver.changeName(filer.getSelectedFile().getPath());
-                    saver.load(filer.getSelectedFile().getPath());
+                    saver.load(filer.getSelectedFile().getPath());//string version
                     DontRunMe.getFrame().getPanel().load(saver);
                 }
                 catch(Exception w)
