@@ -1,0 +1,20 @@
+#BlueJ class context
+comment0.params=enter\ screen\ exit\ type
+comment0.target=Door(java.awt.Point,\ java.lang.String,\ java.awt.Point,\ int)
+comment1.params=load
+comment1.target=Door(java.lang.String)
+comment2.params=
+comment2.target=java.awt.Point\ getPos()
+comment3.params=
+comment3.target=java.awt.Point\ getExit()
+comment4.params=
+comment4.target=java.lang.String\ getDestination()
+comment5.params=
+comment5.target=java.lang.String\ toString()
+comment6.params=p
+comment6.target=boolean\ isAt(java.awt.Point)
+comment7.params=load
+comment7.target=void\ loadFromString(java.lang.String)
+comment8.params=seaver
+comment8.target=boolean\ doorMove(Player)
+numComments=9

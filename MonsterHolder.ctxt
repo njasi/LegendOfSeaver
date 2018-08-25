@@ -1,0 +1,26 @@
+#BlueJ class context
+comment0.params=givenType
+comment0.target=MonsterHolder(java.lang.String)
+comment1.params=xx\ yy
+comment1.target=void\ setCordinates(int,\ int)
+comment10.params=
+comment10.target=boolean\ appearsAtStart()
+comment11.params=
+comment11.target=java.lang.String\ getType()
+comment2.params=HP
+comment2.target=void\ setHp(int)
+comment3.params=chan
+comment3.target=void\ setChannel(int)
+comment4.params=appears
+comment4.target=void\ setAppearAtStart(boolean)
+comment5.params=newType
+comment5.target=void\ setType(java.lang.String)
+comment6.params=
+comment6.target=int\ getX()
+comment7.params=
+comment7.target=int\ getY()
+comment8.params=
+comment8.target=int\ getHP()
+comment9.params=
+comment9.target=int\ getChannel()
+numComments=12

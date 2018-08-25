@@ -1,0 +1,16 @@
+#BlueJ class context
+comment0.params=
+comment0.target=MonsterSelector()
+comment1.params=
+comment1.target=void\ getFileList()
+comment2.params=
+comment2.target=java.awt.Component\ createComponents()
+comment3.params=e
+comment3.target=void\ actionPerformed(java.awt.event.ActionEvent)
+comment4.params=s
+comment4.target=void\ resetContents(java.lang.String)
+comment5.params=n
+comment5.target=void\ setVisible(boolean)
+comment6.params=changeBy
+comment6.target=void\ changeSelection(int)
+numComments=7
