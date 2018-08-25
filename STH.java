@@ -12,6 +12,17 @@ import javax.swing.event.*;
 import javax.swing.table.*;
 public class STH
 {
+    public static void main(String[] args){
+        String boi="level.ser";
+        System.out.println(boi);
+        System.out.println(changeToUsableName(boi));
+    }
+    
+    public static String removeExtension(String s){
+        int dot =s.lastIndexOf(".");
+        return s.substring(dot);
+    }
+    
     public static String changeToUsableName(String s)
     {
         if(s==null)
