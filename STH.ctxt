@@ -1,0 +1,18 @@
+#BlueJ class context
+comment0.params=s
+comment0.target=java.lang.String\ changeToUsableName(java.lang.String)
+comment1.params=boi
+comment1.target=java.util.ArrayList\ makeNoDupe(java.util.ArrayList)
+comment2.params=one\ two
+comment2.target=java.awt.Point\ getBL(java.awt.Point,\ java.awt.Point)
+comment3.params=one\ two
+comment3.target=java.awt.Point\ getTR(java.awt.Point,\ java.awt.Point)
+comment4.params=poo
+comment4.target=java.awt.Point[]\ toPointArray(java.util.ArrayList)
+comment5.params=type\ rot
+comment5.target=int[][]\ ObsToInt(java.lang.String[][],\ int[][])
+comment5.text=Use\ to\ make\ storing\ the\ obstructions\ easier
+comment6.params=boi
+comment6.target=java.lang.String\ IntArrayToString(int[][])
+comment6.text=Use\ to\ make\ storing\ the\ obstructions\ easier\ &\ will\ do\ same\ with\ death\ spots
+numComments=7

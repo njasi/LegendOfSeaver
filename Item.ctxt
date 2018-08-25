@@ -1,0 +1,9 @@
+#BlueJ class context
+comment0.target=Item
+comment1.params=move\ amount\ iconName
+comment1.target=Item(boolean,\ int,\ java.lang.String)
+comment1.text=\n\ use\ this\ constructor\ if\ an\ item\ has\ a\ certain\ amount\ (like\ bombs)\n
+comment2.params=move\ iconName
+comment2.target=Item(boolean,\ java.lang.String)
+comment2.text=\n\ Use\ this\ constructor\ when\ an\ item\ has\ unlimited\ uses\n
+numComments=3

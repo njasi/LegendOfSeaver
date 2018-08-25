@@ -1,0 +1,10 @@
+#BlueJ class context
+comment0.params=xx\ yy\ namey\ path\ b
+comment0.target=Entrance(int,\ int,\ java.lang.String,\ java.lang.String,\ boolean)
+comment1.params=chan
+comment1.target=void\ setLockOnEnter(int)
+comment2.params=
+comment2.target=void\ trigger()
+comment3.params=
+comment3.target=int\ getChan()
+numComments=4
