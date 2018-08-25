@@ -227,9 +227,8 @@ public class GamePanel extends JPanel
                 
                 try
                 {
+                    filer.showDialog(CreatorDriver.getFrame(),"Choose a file");
                     filer.setControlButtonsAreShown(false);
-                    filer.setVisible(true);
-                    System.out.println("load it2");
                     //filer.setFileView();
                     saver.changeName(filer.getSelectedFile().getPath());
                     saver.load(filer.getSelectedFile().getPath());

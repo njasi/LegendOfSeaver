@@ -23,7 +23,7 @@ public class GameFrame extends JFrame
         setUndecorated(true);
         setVisible(true);
         try{
-            UIManager.setLookAndFeel("com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel");
+            //UIManager.setLookAndFeel("com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel");
             //System.setProperty("apple.awt.fullscreenhidecursor","true");
         }
         catch(Exception e)
