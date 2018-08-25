@@ -1,6 +1,7 @@
 #BlueJ class context
-comment0.params=
-comment0.target=Selector()
-comment1.params=g\ x\ y
-comment1.target=void\ draw(java.awt.Graphics,\ int,\ int)
-numComments=2
+comment0.target=Selector
+comment1.params=
+comment1.target=Selector()
+comment2.params=g\ x\ y
+comment2.target=void\ draw(java.awt.Graphics,\ int,\ int)
+numComments=3

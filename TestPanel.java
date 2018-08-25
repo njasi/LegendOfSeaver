@@ -8,7 +8,7 @@ import java.util.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 public class TestPanel extends JPanel
 {
-    //john michael lee
+    //john michael lee is bad
     boolean w=false,a=false,s=false,d=false,f=false,recent=false,ind=true,placingDoor=false,control=false,alt=false;
     static Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
     static double width = screenSize.getWidth(),height = screenSize.getHeight();
