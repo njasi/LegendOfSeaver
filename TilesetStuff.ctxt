@@ -1,9 +1,8 @@
 #BlueJ class context
-comment0.target=TilesetStuff
-comment1.params=
-comment1.target=void\ TilesetToTiles()
-comment2.params=img
-comment2.target=boolean\ isValid(java.awt.image.BufferedImage)
-comment3.params=name\ boi
-comment3.target=void\ createTileSet(java.lang.String,\ Screen[])
-numComments=4
+comment0.params=
+comment0.target=void\ TilesetToTiles()
+comment1.params=img
+comment1.target=boolean\ isValid(java.awt.image.BufferedImage)
+comment2.params=name\ boi
+comment2.target=void\ createTileSet(java.lang.String,\ Screen[])
+numComments=3

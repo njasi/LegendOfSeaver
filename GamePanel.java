@@ -5,6 +5,9 @@ import java.awt.image.*;
 import javax.imageio.*;
 import java.awt.event.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
+/**
+ * @SuppressWarnings("unchecked")
+ */
 public class GamePanel extends JPanel
 {
     private static Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
@@ -113,6 +116,7 @@ public class GamePanel extends JPanel
     /**used to load screens for now, just temporary*/
     public void load(ScreenPackage stuff)
     {
+        System.out.println(stuff.getName()+"boi"+STH.changeToUsableName(levelName));
         levelName=stuff.getName();
         changeScreen(STH.changeToUsableName(levelName));
         obs=new Screen(stuff.getObs(),stuff.getObsR(),true);
@@ -149,6 +153,11 @@ public class GamePanel extends JPanel
     public void changeScreen(String change)
     {
         try{
+            change = STH.removeExtension(change);
+            System.out.println("Line 157: "+change);
+            int index = change.lastIndexOf("\\");
+            change = change.substring(index+1);
+            System.out.println("Line 160: "+change);
             screen =ImageIO.read(new File("images/screens/"+change+".png"));
             screen= screen.getScaledInstance(screen.getWidth(null)*zoom,screen.getHeight(null)*zoom,1);
         }

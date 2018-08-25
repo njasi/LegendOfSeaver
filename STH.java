@@ -20,7 +20,7 @@ public class STH
     
     public static String removeExtension(String s){
         int dot =s.lastIndexOf(".");
-        return s.substring(dot);
+        return s.substring(0,dot);
     }
     
     public static String changeToUsableName(String s)

@@ -1,9 +1,8 @@
 #BlueJ class context
-comment0.target=Soldier
-comment1.params=n\ xx\ yy
-comment1.target=Soldier(java.lang.String,\ int,\ int)
+comment0.params=n\ xx\ yy
+comment0.target=Soldier(java.lang.String,\ int,\ int)
+comment1.params=
+comment1.target=void\ attack()
 comment2.params=
-comment2.target=void\ attack()
-comment3.params=
-comment3.target=void\ move()
-numComments=4
+comment2.target=void\ move()
+numComments=3

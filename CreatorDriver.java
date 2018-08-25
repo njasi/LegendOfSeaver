@@ -10,6 +10,9 @@ import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.event.*;
 import javax.swing.table.*;
+/**
+ * @SuppressWarnings("unchecked")
+ */
 public class CreatorDriver
 {
     static private boolean fullScreen=false;
