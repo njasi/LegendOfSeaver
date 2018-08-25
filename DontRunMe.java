@@ -10,8 +10,12 @@ import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.event.*;
 import javax.swing.table.*;
+/**
+ * @SuppressWarnings("unchecked")
+ */
 public class DontRunMe
 {
+    
     static GameFrame test;
     public static void main(String[] args)
     {
