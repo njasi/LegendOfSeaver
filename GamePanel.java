@@ -155,8 +155,10 @@ public class GamePanel extends JPanel
         try{
             change = STH.removeExtension(change);
             System.out.println("Line 157: "+change);
-            int index = change.lastIndexOf("/");
-            change = change.substring(index+1);
+            if(System.getProperty("os.name").indexOf("Windows")>=0){
+                int index = change.lastIndexOf("\\");
+                change = change.substring(index+1);
+            }
             System.out.println("Line 160: "+change);
             screen =ImageIO.read(new File("images/screens/"+change+".png"));
             screen= screen.getScaledInstance(screen.getWidth(null)*zoom,screen.getHeight(null)*zoom,1);
