@@ -129,4 +129,18 @@ public class STH
         }
         return ret;
     }
+
+    public static String StringArrayToString(String[][] boi)
+    {
+        String ret="";
+        for(int i=0;i<boi.length;i++)
+        {
+            for(int j=0;j<boi[0].length;j++)
+            {
+                ret=ret+"\t"+boi[i][j];
+            }
+            ret+="\n";
+        }
+        return ret;
+    }
 }

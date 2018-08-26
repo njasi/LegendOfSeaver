@@ -1,6 +1,8 @@
 #BlueJ class context
-comment0.params=args
-comment0.target=void\ main(java.lang.String[])
-comment1.params=
-comment1.target=TestFrame\ getFrame()
-numComments=2
+comment0.target=CreatorDriver
+comment0.text=\n\ @SuppressWarnings("unchecked")\n
+comment1.params=args
+comment1.target=void\ main(java.lang.String[])
+comment2.params=
+comment2.target=TestFrame\ getFrame()
+numComments=3

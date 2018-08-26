@@ -33,6 +33,7 @@ public class GamePanel extends JPanel
 
     public void paintComponent(Graphics t)
     {  
+        //System.out.println("running"+System.nanoTime());
         //starting it out
         super.paintComponent(t);
         Graphics2D g=(Graphics2D)t;//switch to 2D graphics
@@ -46,6 +47,7 @@ public class GamePanel extends JPanel
         g.drawImage(screen,ext,16*zoom,null);//draws background
         if(showObs){
             obs.draw(g);//shows obs, this slows down the game, but good for testing
+            System.out.println(obs);
         }
         seaver.draw(g);//draws player
         mover();//gets how player should move
@@ -116,9 +118,9 @@ public class GamePanel extends JPanel
     /**used to load screens for now, just temporary*/
     public void load(ScreenPackage stuff)
     {
-        System.out.println(stuff.getName()+"boi"+STH.changeToUsableName(levelName));
         levelName=stuff.getName();
         changeScreen(STH.changeToUsableName(levelName));
+        System.out.println(STH.StringArrayToString(stuff.getObs()));
         obs=new Screen(stuff.getObs(),stuff.getObsR(),true);
         String[] boi=stuff.getDoors();
         doors=new Door[boi.length];
@@ -154,12 +156,10 @@ public class GamePanel extends JPanel
     {
         try{
             change = STH.removeExtension(change);
-            System.out.println("Line 157: "+change);
             if(System.getProperty("os.name").indexOf("Windows")>=0){
                 int index = change.lastIndexOf("\\");
                 change = change.substring(index+1);
             }
-            System.out.println("Line 160: "+change);
             screen =ImageIO.read(new File("images/screens/"+change+".png"));
             screen= screen.getScaledInstance(screen.getWidth(null)*zoom,screen.getHeight(null)*zoom,1);
         }
@@ -208,6 +208,7 @@ public class GamePanel extends JPanel
         public void keyPressed(KeyEvent e)
         {
             int key=e.getKeyCode();
+            System.out.println(key);
             if(key==KeyEvent.VK_W)
             {
                 w=true;
@@ -238,7 +239,10 @@ public class GamePanel extends JPanel
                 
                 try
                 {
-                    filer.showDialog(CreatorDriver.getFrame(),"Choose a file");
+                    int cancel=filer.showDialog(CreatorDriver.getFrame(),"Choose a file");
+                    if(cancel==1){
+                        return;
+                    }
                     filer.setControlButtonsAreShown(false);
                     //filer.setFileView();
                     saver.changeName(filer.getSelectedFile().getPath());
