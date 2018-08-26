@@ -17,12 +17,16 @@ public class STH
         System.out.println(boi);
         System.out.println(changeToUsableName(boi));
     }
-    
+
     public static String removeExtension(String s){
         int dot =s.lastIndexOf(".");
-        return s.substring(0,dot);
+        if(dot!=-1){
+            return s.substring(0,dot);
+        }else{ 
+            return s;
+        }
     }
-    
+
     public static String changeToUsableName(String s)
     {
         if(s==null)
