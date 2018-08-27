@@ -132,7 +132,11 @@ public class SideBar
             return "unknown.png";
         }
     }
-
+       
+    public int getVerticalScroll(){
+        return verticalScroll;
+    }
+    
     public int getWidth()
     {
         return displayed[0].length-1;
@@ -151,5 +155,13 @@ public class SideBar
     public int getStage()
     {
         return stage;
+    }
+    
+    public void scroll(boolean down){
+        if(down){
+            verticalScroll--;
+        }else if(!down){
+            verticalScroll++;
+        }
     }
 }

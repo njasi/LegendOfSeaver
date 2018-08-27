@@ -12,7 +12,7 @@ public class TestPanel extends JPanel
     private boolean w=false,a=false,s=false,d=false,f=false,recent=false,ind=true,placingDoor=false,control=false,alt=false;
     static Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
     static double width = screenSize.getWidth(),height = screenSize.getHeight();
-    private static int x=0,xm=0,ym=0,xs=0,ys=0,sx=0,sy=0,counter=0,c2=0,type=1,rotate=0,dn=0,zoom;
+    private static int x=0,xs=0,ys=0,sx=0,sy=0,counter=0,c2=0,type=1,rotate=0,dn=0,zoom;
     private long now,framesTimer=0;
     private int framesCount=0,fps;
     private InventoryBar testBar= new InventoryBar();
@@ -135,6 +135,9 @@ public class TestPanel extends JPanel
         if(c2==80)
         {
             c2=0;//makes bars flash
+        }
+        if(c2%10==0){
+            mouseAutoScroll();//sidebar auto scroll
         }
     }
 
@@ -274,28 +277,22 @@ public class TestPanel extends JPanel
     {
         try
         {
-            int mx=0;
-            int my=0;
-            if(ind)
-            {
-                mx=(int)getMousePosition().getX();
-                my=(int)getMousePosition().getY();
+            int sz=16*zoom;
+            int mx=(int)getMousePosition().getX();
+            int my=(int)getMousePosition().getY();
+            if(!ind){
+                mx=-CreatorDriver.getFrame().extra();
             }
-            else
+            if(mx>15*sz&&!sidebar)
             {
-                mx=(int)getMousePosition().getX()-CreatorDriver.getFrame().extra();
-                my=(int)getMousePosition().getY();
+                mx=15*sz;
             }
-            if(mx>15*16*zoom&&!sidebar)
-            {
-                mx=15*16*zoom;
-            }
-            mx=(mx/(16*zoom));
+            mx=(mx/sz);
             if(my<16*zoom)
             {
-                my=my+16*zoom;
+                my=my+sz;
             }
-            my=(my/(16*zoom));
+            my=(my/sz);
             return new Point(mx,my);
         }
         catch (Exception e)
@@ -538,7 +535,7 @@ public class TestPanel extends JPanel
         {
             w.printStackTrace();
         }
-        
+
     }
 
     public void saveFromMenu()
@@ -604,15 +601,28 @@ public class TestPanel extends JPanel
         lefts=l;
         bottoms=b;
     }
-    
+
     public void setMonsterSelection(String s){
         monsterType=s;
     }
-    
+
     public void updateSideBar(){
         bar= new SideBar();
     }
-    
+
+    public void mouseAutoScroll(){
+        Point temp=mover(true);
+        if(temp.getX()<16||temp.getX()>22){
+            return;
+        }
+        if(temp.getY()>14&&sy+1<bar.getLength()){
+            sy++;
+        }else if(temp.getY()<2&&sy>0){
+            sy--;
+        }
+        bar.setSelected(sx,sy);
+    }
+
     public class MyMouseListener extends MouseAdapter
     {
         boolean down=false,multipleDoors=false;
@@ -1003,8 +1013,8 @@ public class TestPanel extends JPanel
             }else if(e.getX()>zoom*272&&e.getX()<zoom*352){
                 Point toChange= it.mover(true);
                 sx=(int)toChange.getX()-17;
-                sy=(int)toChange.getY()-1;
-                bar.setSelected((int)toChange.getX()-17,(int)toChange.getY()-1);
+                sy=(int)toChange.getY()-(1+bar.getVerticalScroll());
+                bar.setSelected((int)toChange.getX()-17,(int)toChange.getY()-(1+bar.getVerticalScroll()));
             }
         }
 
