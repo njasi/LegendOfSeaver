@@ -9,7 +9,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 public class TestPanel extends JPanel
 {
     //john michael lee is bad
-    boolean w=false,a=false,s=false,d=false,f=false,recent=false,ind=true,placingDoor=false,control=false,alt=false;
+    private boolean w=false,a=false,s=false,d=false,f=false,recent=false,ind=true,placingDoor=false,control=false,alt=false;
     static Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
     static double width = screenSize.getWidth(),height = screenSize.getHeight();
     private static int x=0,xm=0,ym=0,xs=0,ys=0,sx=0,sy=0,counter=0,c2=0,type=1,rotate=0,dn=0,zoom;
@@ -20,7 +20,7 @@ public class TestPanel extends JPanel
     //Player seaver= new Player();
     Selector sell= new Selector();
     SideBar bar= new SideBar();
-    String changeTo="unknown.png",levelName,ss,doorInfo="",tops="empty",rights="empty",lefts="empty",bottoms="empty";
+    String changeTo="unknown.png",levelName,ss,doorInfo="",tops="empty",rights="empty",lefts="empty",bottoms="empty",monsterType="none";
     Image up,down,left,right,door,fadedDoor,cornerInd;
     Point old=null,p,doorTo,doorFrom,TR= new Point(),BL;
     MyMouseListener clicky=new MyMouseListener();
@@ -31,7 +31,6 @@ public class TestPanel extends JPanel
     TestPanel it=this;
     JOptionPane lee= new JOptionPane();
     ImprovedJOptionPane jasinski= new ImprovedJOptionPane();
-    MonsterSelector monsel = new MonsterSelector();
     LevelEdges edger;
     SpecialSelector selectorSpecial= new SpecialSelector();
     
@@ -573,11 +572,6 @@ public class TestPanel extends JPanel
         levelName= s;
     }
 
-    public MonsterSelector getMonsterSelector()
-    {
-        return monsel;
-    }
-
     public LevelEdges getLevelEdges()
     {
         return edger;
@@ -609,6 +603,10 @@ public class TestPanel extends JPanel
         rights=r;
         lefts=l;
         bottoms=b;
+    }
+    
+    public void setMonsterSelection(String s){
+        monsterType=s;
     }
     public class MyMouseListener extends MouseAdapter
     {

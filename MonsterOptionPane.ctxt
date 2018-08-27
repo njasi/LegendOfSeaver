@@ -1,7 +1,7 @@
 #BlueJ class context
-comment0.target=MonsterOption
+comment0.target=MonsterOptionPane
 comment1.params=
-comment1.target=MonsterOption()
+comment1.target=MonsterOptionPane()
 comment2.params=
 comment2.target=java.lang.String\ search()
 comment3.params=s

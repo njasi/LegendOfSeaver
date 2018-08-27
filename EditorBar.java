@@ -8,6 +8,7 @@ public class EditorBar implements ActionListener,Runnable
     private JMenu fileMenu;
     private JMenu stageMenu;
     private JMenu viewMenu;
+    private JMenu toolMenu;
     private JMenu triggerMenu;
     private JMenuItem openMenuItem;
     private JMenuItem saveMenuItem;
@@ -19,10 +20,13 @@ public class EditorBar implements ActionListener,Runnable
     private JMenuItem indMenuItem;
     private JMenuItem monMenuItem;
     private JMenuItem specMenuItem;
-    private JMenuItem msMenuItem;
     private JMenuItem leMenuItem;
     private JMenuItem trigMenuItem;
     private JMenuItem ssMenuItem;
+    private JMenuItem seMenuItem;
+    private JMenuItem mstMenuItem;
+    private JMenuItem tsoMenuItem;
+
     public EditorBar(JFrame frame)
     {
         menuBar = new JMenuBar();
@@ -62,18 +66,24 @@ public class EditorBar implements ActionListener,Runnable
         // build the View menu
         viewMenu = new JMenu("View");
         indMenuItem = new JMenuItem("Hide Indicators");
-        msMenuItem = new JMenuItem("Show Monster Selector");
         leMenuItem = new JMenuItem("Show Level Edges");
         ssMenuItem = new JMenuItem("Show Special Selector");
         indMenuItem.addActionListener(this);
-        msMenuItem.addActionListener(this);
         leMenuItem.addActionListener(this);
         ssMenuItem.addActionListener(this);
         viewMenu.add(indMenuItem);
-        viewMenu.add(msMenuItem);
         viewMenu.add(leMenuItem);
         viewMenu.add(ssMenuItem);
-        
+
+        // build the Tools menu
+        toolMenu = new JMenu("Tools");
+        mstMenuItem = new JMenuItem("Monster Search");
+        tsoMenuItem = new JMenuItem("Break Down Tileset");
+        mstMenuItem.addActionListener(this);
+        tsoMenuItem.addActionListener(this);
+        toolMenu.add(mstMenuItem);
+        toolMenu.add(tsoMenuItem);
+
         //trigger menu
         triggerMenu = new JMenu("Triggers");
         trigMenuItem = new JMenuItem("Show Trigger Options");
@@ -83,6 +93,7 @@ public class EditorBar implements ActionListener,Runnable
         menuBar.add(fileMenu);
         menuBar.add(stageMenu);
         menuBar.add(viewMenu);
+        menuBar.add(toolMenu);
         menuBar.add(triggerMenu);
 
         openMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_O, ActionEvent.CTRL_MASK));
@@ -95,6 +106,7 @@ public class EditorBar implements ActionListener,Runnable
         monMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_M,ActionEvent.SHIFT_MASK));
         specMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S,ActionEvent.SHIFT_MASK));
         indMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_I, ActionEvent.CTRL_MASK));
+        mstMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_M, ActionEvent.CTRL_MASK));
         // put the menubar on the frame
         frame.setJMenuBar(menuBar);
     }
@@ -131,8 +143,6 @@ public class EditorBar implements ActionListener,Runnable
         }
         else if(action.equals("Monsters")){
             boi.changeStage(4);
-            msMenuItem.setText("Hide Monster Selector");
-            //CreatorDriver.getFrame().getPanel().getMonsterSelector().setVisible(true);
         }
         else if(action.equals("Hide Indicators")){
             boi.toggleInd();
@@ -141,14 +151,6 @@ public class EditorBar implements ActionListener,Runnable
         else if(action.equals("Show Indicators")){
             boi.toggleInd();
             indMenuItem.setText("Hide Indicators");
-        }
-        else if(action.equals("Show Monster Selector")){
-            msMenuItem.setText("Hide Monster Selector");
-            CreatorDriver.getFrame().getPanel().getMonsterSelector().setVisible(true);
-        }
-        else if(action.equals("Hide Monster Selector")){
-            msMenuItem.setText("Show Monster Selector");
-            CreatorDriver.getFrame().getPanel().getMonsterSelector().setVisible(false);
         }
         else if(action.equals("Hide Level Edges")){
             leMenuItem.setText("Show Level Edges");
@@ -166,19 +168,15 @@ public class EditorBar implements ActionListener,Runnable
             ssMenuItem.setText("Hide Special Selector");
             CreatorDriver.getFrame().getPanel().getSS().setVisible(true);
         }
-    }
-
-    public void toggleMonsel(boolean j)
-    {
-        if(j){
-            msMenuItem.setText("Hide Monster Selector");
-            CreatorDriver.getFrame().getPanel().getMonsterSelector().setVisible(true);
-        }else{
-            msMenuItem.setText("Show Monster Selector");
-            CreatorDriver.getFrame().getPanel().getMonsterSelector().setVisible(false);
+        else if(action.equals("Monster Search")){
+            MonsterOptionPane chris= new MonsterOptionPane();
+            CreatorDriver.getFrame().getPanel().setMonsterSelection(chris.search());
+        }
+        else if(action.equals("Break Down Tileset")){
+            TilesetStuff.TilesetToTiles();
         }
     }
-    
+
     public void toggleEdges(boolean f)
     {
         if(f){

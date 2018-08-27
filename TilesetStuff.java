@@ -6,16 +6,22 @@ import javax.swing.*;
 import javax.imageio.*;
 import java.util.*;
 import java.awt.geom.AffineTransform;
+import javax.swing.filechooser.FileNameExtensionFilter;
 public class TilesetStuff
 {
     public static void TilesetToTiles()
     {
+        int imagesCreated=0;
         BufferedImage start;
         JFileChooser filer= new JFileChooser("Images/TilesetsToBeConverted");
         try
         {
-            filer.showDialog(new JFrame(),"Choose a file");
-            filer.setControlButtonsAreShown(false);
+            //FileNameExtensionFilter filter = new FileNameExtensionFilter("Images",".png");
+            //filer.setFileFilter(filter);
+            int r=filer.showDialog(new JFrame(),"Choose a file");
+            if(r==1){
+                return;   
+            }
             start= ImageIO.read(new File(filer.getSelectedFile().getPath()));
             String partOne=STH.changeToUsableName(filer.getSelectedFile().getPath());
             int w=start.getWidth()/16;
@@ -25,17 +31,11 @@ public class TilesetStuff
             {
                 for(int j=0;j/16<w;j+=16)
                 {
-                    try
+                    BufferedImage temp=start.getSubimage(j,i,16,16);
+                    if(isValid(temp))
                     {
-                        BufferedImage temp=start.getSubimage(j,i,16,16);
-                        if(isValid(temp))
-                        {
-                            ImageIO.write(temp,"png",new File("images/tiles/"+partOne+"_"+name+".png"));
-                        }
-                    }
-                    catch(Exception boi)
-                    {
-                        boi.printStackTrace();
+                        ImageIO.write(temp,"png",new File("images/tiles/"+partOne+"_"+name+".png"));
+                        imagesCreated++;
                     }
                     name++;
                 }
@@ -63,7 +63,7 @@ public class TilesetStuff
         }
         return isValid;
     }
-    
+
     public static void createTileSet(String name,Screen[] boi)
     {
         ArrayList<String> init= new ArrayList<String>();
@@ -81,7 +81,7 @@ public class TilesetStuff
                 }
             }
         }
-        
+
         int guy=(int)Math.ceil(Math.sqrt(init.size()));
         Tile[][] temp = new Tile[guy][guy];
         int c=0;
@@ -104,8 +104,7 @@ public class TilesetStuff
                 g.drawImage(op.filter(hell, null), i*16, j*16, null);
             }
         }
-        
-        
+
         try
         {
             ImageIO.write(result,"png",new File("Images/tilesets/"+name+".png"));
