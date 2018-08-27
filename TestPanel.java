@@ -34,6 +34,7 @@ public class TestPanel extends JPanel
     MonsterSelector monsel = new MonsterSelector();
     LevelEdges edger;
     SpecialSelector selectorSpecial= new SpecialSelector();
+    
     public TestPanel()
     {
         zoom=CreatorDriver.getFrame().getZoom();
