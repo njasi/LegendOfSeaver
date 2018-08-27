@@ -33,7 +33,7 @@ public class TestPanel extends JPanel
     ImprovedJOptionPane jasinski= new ImprovedJOptionPane();
     LevelEdges edger;
     SpecialSelector selectorSpecial= new SpecialSelector();
-    
+
     public TestPanel()
     {
         zoom=CreatorDriver.getFrame().getZoom();
@@ -113,7 +113,7 @@ public class TestPanel extends JPanel
             }
         }
         //testBar.draw(g2d,ind);//draws top bar (kinda pointless here)
-        p=mover();//where mouse is 
+        p=mover(false);//where mouse is 
         if(!p.equals(old))//drag draw
         {
             changeBoi();
@@ -270,7 +270,7 @@ public class TestPanel extends JPanel
         return height;
     }
 
-    public Point mover()
+    public Point mover(boolean sidebar)
     {
         try
         {
@@ -286,7 +286,7 @@ public class TestPanel extends JPanel
                 mx=(int)getMousePosition().getX()-CreatorDriver.getFrame().extra();
                 my=(int)getMousePosition().getY();
             }
-            if(mx>15*16*zoom)
+            if(mx>15*16*zoom&&!sidebar)
             {
                 mx=15*16*zoom;
             }
@@ -313,7 +313,7 @@ public class TestPanel extends JPanel
     {
         try
         {
-            Point toChange= mover();
+            Point toChange= mover(false);
             changeTo=SideBar.getSelected();
             bar.setSelected(sx,sy);
             if(bar.getStage()==0&&clicky.down())
@@ -608,6 +608,11 @@ public class TestPanel extends JPanel
     public void setMonsterSelection(String s){
         monsterType=s;
     }
+    
+    public void updateSideBar(){
+        bar= new SideBar();
+    }
+    
     public class MyMouseListener extends MouseAdapter
     {
         boolean down=false,multipleDoors=false;
@@ -620,7 +625,7 @@ public class TestPanel extends JPanel
                 down=true;
                 saver=new ScreenPackage();//loads the screen the door will go to;
                 try{
-                    Point toChange= mover();
+                    Point toChange= mover(false);
                     if(bar.getStage()==0)//tiles
                     {
                         if(f&&control)//fill
@@ -995,6 +1000,11 @@ public class TestPanel extends JPanel
                 {
                     killMe.printStackTrace();
                 }
+            }else if(e.getX()>zoom*272&&e.getX()<zoom*352){
+                Point toChange= it.mover(true);
+                sx=(int)toChange.getX()-17;
+                sy=(int)toChange.getY()-1;
+                bar.setSelected((int)toChange.getX()-17,(int)toChange.getY()-1);
             }
         }
 

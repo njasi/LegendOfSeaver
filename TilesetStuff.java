@@ -11,6 +11,7 @@ public class TilesetStuff
 {
     public static void TilesetToTiles()
     {
+        JOptionPane boi=new JOptionPane();
         int imagesCreated=0;
         BufferedImage start;
         JFileChooser filer= new JFileChooser("Images/TilesetsToBeConverted");
@@ -40,9 +41,12 @@ public class TilesetStuff
                     name++;
                 }
             }
+            CreatorDriver.getFrame().getPanel().updateSideBar();
+            boi.showMessageDialog(CreatorDriver.getFrame(), "You sucessfully loaded "+imagesCreated+" tiles from the tileset.", "Tileset Loaded",1);
         }
         catch(Exception e)
         {
+            boi.showMessageDialog(CreatorDriver.getFrame(), imagesCreated+" tiles were loaded before an error occured.", "Tileset Loaded",1);
             e.printStackTrace();
         }
     }

@@ -2,6 +2,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.io.*;
 import java.awt.image.*;
+import java.util.Arrays;
 import javax.imageio.*;
 import java.awt.event.*;
 public class SideBar
@@ -9,15 +10,18 @@ public class SideBar
     static int width = (int)TestFrame.getW(), x=12,y=0,verticalScroll=0,stage=0;
     static int zoom=CreatorDriver.getFrame().getZoom(),end =(257)*zoom,spaceLeft=width-end;
     static int ArrayWidth=(spaceLeft)/(32*zoom);
-    static int length= new File("images/tiles").listFiles().length;
-    static Tile[][] displayed =new Tile[1+(int)Math.ceil((length+0.0)/(ArrayWidth+0.0))][ArrayWidth];
+    static int length;
+    static Tile[][] displayed;
     static Selector hello= new Selector();
     static String selected;
     public SideBar()
     {
         int c=1;
+        length = new File("images/tiles").listFiles().length;
+        displayed = new Tile[1+(int)Math.ceil((length+0.0)/(ArrayWidth+0.0))][ArrayWidth];
         File folder = new File("images/tiles");
         File[] listOfFiles = folder.listFiles();
+        Arrays.sort(listOfFiles);
         for(int i=0;i< displayed.length;i++)
         {
             for(int j =0;j<displayed[i].length;j++)
