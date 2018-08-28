@@ -23,7 +23,15 @@ public class MonsterOptionPane extends JOptionPane{
 
     public String showConfirmDialog(String s)
     { 
-        int i=super.showConfirmDialog(null,getList(s),"Choose a result",JOptionPane.OK_CANCEL_OPTION,JOptionPane.PLAIN_MESSAGE);
+        if(s.length()==0){
+            s=".png";
+        }
+        int i=1;
+        try{
+            i=super.showConfirmDialog(null,getList(s),"Choose a result",JOptionPane.OK_CANCEL_OPTION,JOptionPane.PLAIN_MESSAGE);
+        }catch(Exception e){
+            System.out.println("oof");
+        }
         if(results.getSelectedItem().equals("There were no results, sorry."))
         {
             return null;
@@ -51,7 +59,7 @@ public class MonsterOptionPane extends JOptionPane{
     }
 
     private String[] filesToStringArray(File[] stuff,String search)
-    {
+    {   
         String[] returner= new String[1];
         ArrayList<String> boi= new ArrayList<String>();
         for(int i=0;i<stuff.length;i++)

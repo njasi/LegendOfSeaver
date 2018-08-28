@@ -9,9 +9,9 @@ public class MonsterHolder implements Serializable
     String type;//type of monster
     int x,y,hp,channel;//channel if it will not appear at start, when channel is active they will appear
     boolean appearsAtStart;//if false the thing is not present until channel turns active
-    public MonsterHolder(String givenType)
+    public MonsterHolder(Image img)
     {
-        type=givenType;
+        monster=img;
     }
     
     public void setCordinates(int xx,int yy){
@@ -50,6 +50,10 @@ public class MonsterHolder implements Serializable
     
     public int getChannel(){
        return channel; 
+    }
+    
+    public Image getImage(){
+       return monster; 
     }
     
     public boolean appearsAtStart(){

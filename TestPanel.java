@@ -8,24 +8,23 @@ import java.util.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 public class TestPanel extends JPanel
 {
-    //john michael lee is bad
     private boolean w=false,a=false,s=false,d=false,f=false,recent=false,ind=true,placingDoor=false,control=false,alt=false;
     static Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
     static double width = screenSize.getWidth(),height = screenSize.getHeight();
     private static int x=0,xs=0,ys=0,sx=0,sy=0,counter=0,c2=0,type=1,rotate=0,dn=0,zoom;
     private long now,framesTimer=0;
-    private int framesCount=0,fps;
+    private int framesCount=0,fps,monNumb=0;
     private InventoryBar testBar= new InventoryBar();
     Screen test= new Screen(14,16,"unknown"),obs= new Screen(14,16,"filler"),deco= new Screen(14,16,"filler");
     //Player seaver= new Player();
     Selector sell= new Selector();
     SideBar bar= new SideBar();
-    String changeTo="unknown.png",levelName,ss,doorInfo="",tops="empty",rights="empty",lefts="empty",bottoms="empty",monsterType="none";
+    String changeTo="unknown.png",levelName,ss,doorInfo="",tops="empty",rights="empty",lefts="empty",bottoms="empty";
     Image up,down,left,right,door,fadedDoor,cornerInd;
     Point old=null,p,doorTo,doorFrom,TR= new Point(),BL;
     MyMouseListener clicky=new MyMouseListener();
     Door[] doors= new Door[0];
-    MonsterHolder[] monsters = new MonsterHolder[0];
+    MonsterHolder[] monsterTypes,monsters;
     Point[] faded = new Point[0];
     ScreenPackage currentScreen,saver= new ScreenPackage();
     TestPanel it=this;
@@ -58,6 +57,7 @@ public class TestPanel extends JPanel
         }
         LevelEdges.setPlaces("empty","empty","empty","empty","empty");
         edger= new LevelEdges();
+        loadMonsters();
     }
 
     public TestPanel(int zoomV)
@@ -78,6 +78,7 @@ public class TestPanel extends JPanel
         }
         catch(Exception e)
         {}
+        loadMonsters();
     }
 
     public void paintComponent(Graphics g)
@@ -119,12 +120,6 @@ public class TestPanel extends JPanel
             changeBoi();
         }
         old=p;//where mouse was
-        //try
-        //{
-        //    Thread.sleep(10);
-        //}
-        //catch(Exception e)
-        //{}
         drawIndicators(g2d);
         repaint();
     }
@@ -136,7 +131,7 @@ public class TestPanel extends JPanel
         {
             c2=0;//makes bars flash
         }
-        if(c2%10==0){
+        if(c2%10==0&&bar.getLength()>14){
             mouseAutoScroll();//sidebar auto scroll
         }
     }
@@ -166,7 +161,8 @@ public class TestPanel extends JPanel
                         temp.draw(g,256*zoom+(bar.getWidth()+2)*16*zoom,0,false);
                     }catch(Exception e){}
                 }else if(bar.getStage()==4){
-                    g.fillRect(257*zoom+(bar.getWidth()+2)*16*zoom,0,100,100);
+                    g.setColor(Color.BLACK);
+                    drawMonsters(g);
                 }
             }
             catch(Exception e)
@@ -232,8 +228,8 @@ public class TestPanel extends JPanel
         }
     }
 
-    private void drawMonsters(){
-
+    private void drawMonsters(Graphics g){
+        g.drawImage(monsterTypes[monNumb].getImage(),257*zoom+(bar.getWidth()+2)*16*zoom,0,null);
     }
 
     public void drawInd(Point pt,Graphics g)
@@ -602,10 +598,6 @@ public class TestPanel extends JPanel
         bottoms=b;
     }
 
-    public void setMonsterSelection(String s){
-        monsterType=s;
-    }
-
     public void updateSideBar(){
         bar= new SideBar();
     }
@@ -621,6 +613,36 @@ public class TestPanel extends JPanel
             sy--;
         }
         bar.setSelected(sx,sy);
+    }
+
+    public void loadMonsters(){
+        File monsterFolder= new File("Images/Monsters");
+        File[] listOfMonsters=monsterFolder.listFiles(new FileFilter() {
+                    public boolean accept(File file) {
+                        return file.isFile() && file.getName().toLowerCase().endsWith(".png");
+                    }
+                });
+
+        Arrays.sort(listOfMonsters);
+        monsterTypes=new MonsterHolder[listOfMonsters.length];
+        try{
+            for(int i=0;i<listOfMonsters.length;i++){
+                monsterTypes[i]= new MonsterHolder(ImageIO.read(listOfMonsters[i]));
+                monsterTypes[i].setType(STH.removeExtension(listOfMonsters[i].getName()));
+            }
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    public void setMonsterSelection(String s){
+        for(int i=0;i<monsterTypes.length;i++){
+            if(monsterTypes[i].getType().equals(s)){
+                monNumb=i;
+                return;
+            }
+        }
+        System.err.println("Was unable to find "+s);
     }
 
     public class MyMouseListener extends MouseAdapter
