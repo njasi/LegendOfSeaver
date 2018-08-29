@@ -1,6 +1,6 @@
 #BlueJ class context
 comment0.target=GamePanel
-comment0.text=\n\ @SuppressWarnings("unchecked")\n
+comment0.text=\r\n\ @SuppressWarnings("unchecked")\r\n
 comment1.params=
 comment1.target=GamePanel()
 comment2.params=t

@@ -1,6 +1,6 @@
 #BlueJ class context
 comment0.target=MonsterHolder
-comment0.text=\n\ This\ is\ used\ to\ hold\ monsters\ in\ the\ editor\n
+comment0.text=\r\n\ This\ is\ used\ to\ hold\ monsters\ in\ the\ editor\r\n
 comment1.params=img
 comment1.target=MonsterHolder(java.awt.Image)
 comment10.params=
