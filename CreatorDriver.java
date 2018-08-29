@@ -15,6 +15,7 @@ import javax.swing.table.*;
  */
 public class CreatorDriver
 {
+    // is this working
     static private boolean fullScreen=false;
     static TestFrame test;
     public static void main(String[] args)
