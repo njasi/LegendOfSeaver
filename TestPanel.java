@@ -24,7 +24,7 @@ public class TestPanel extends JPanel
     Point old=null,p,doorTo,doorFrom,TR= new Point(),BL;
     MyMouseListener clicky=new MyMouseListener();
     Door[] doors= new Door[0];
-    MonsterHolder[] monsterTypes,monsters;
+    MonsterHolder[] monsterTypes,monsters= new MonsterHolder[0];
     Point[] faded = new Point[0];
     ScreenPackage currentScreen,saver= new ScreenPackage();
     TestPanel it=this;
@@ -231,7 +231,10 @@ public class TestPanel extends JPanel
     }
 
     private void drawMonsters(Graphics g){
-        g.drawImage(monsterTypes[monNumb].getImage(),257*zoom+(bar.getWidth()+2)*16*zoom,0,null);
+        g.drawImage(monsterTypes[monNumb].getImage(),257*zoom+(bar.getWidth()+2)*16*zoom,0,null);//Indicator on side
+        for(int i=0;i<monsters.length;i++){
+            monsters[i].draw(g);
+        }
     }
 
     public void drawInd(Point pt,Graphics g)
@@ -389,6 +392,7 @@ public class TestPanel extends JPanel
     private void updateZoom()//lets the window be resized and everything shrinks
     {
         Tile.updateZoom();
+        MonsterHolder.updateZoom();
         try
         {
             TestFrame.changeW(CreatorDriver.getFrame().getWidth());
@@ -620,11 +624,18 @@ public class TestPanel extends JPanel
         bar.setSelected(sx,sy);
     }
 
+    private void displayMonsters(){
+        System.out.println("Current Monsters:");
+        for(int i=0;i<monsters.length;i++){
+            System.out.println(monsters[i]);
+        }
+    }
+
     public void loadMonsters(){
         File monsterFolder= new File("Images/Monsters");
         File[] listOfMonsters=monsterFolder.listFiles(new FileFilter() {
                     public boolean accept(File file) {
-                        return file.isFile() && file.getName().toLowerCase().endsWith(".png");
+                        return file.isFile() && (file.getName().toLowerCase().endsWith(".png")||file.getName().toLowerCase().endsWith(".jpg"));
                     }
                 });
 
@@ -1006,9 +1017,18 @@ public class TestPanel extends JPanel
                             }
                         }
                     }
-                    else if(bar.getStage()==4)//monsters
+                    else if(bar.getStage()==4)//monster placing
                     {
-
+                        MonsterHolder[] temp = new MonsterHolder[monsters.length+1];
+                        for(int i=0;i<monsters.length;i++){
+                            System.out.println(monsters[i]);
+                        }
+                        for(int i=0;i<monsters.length;i++){
+                            temp[i]=monsters[i];
+                        }
+                        temp[temp.length-1] = new MonsterHolder(monsterTypes[monNumb].getImage(),monsterTypes[monNumb].getType());
+                        temp[temp.length-1].setCordinates(mover(false));
+                        monsters=temp;
                     }
                     else if(bar.getStage()==5)//special
                     {

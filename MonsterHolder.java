@@ -6,6 +6,7 @@ import java.awt.*;
 public class MonsterHolder implements Serializable
 {
     private Image monster;
+    static int zoom=CreatorDriver.getFrame().getZoom();
     String type;//type of monster
     int x,y,hp,channel;//channel if it will not appear at start, when channel is active they will appear
     boolean appearsAtStart;//if false the thing is not present until channel turns active
@@ -14,9 +15,20 @@ public class MonsterHolder implements Serializable
         monster=img;
     }
     
+    public MonsterHolder(Image img,String type)
+    {
+        monster=img;
+        this.type=type;
+    }
+    
     public void setCordinates(int xx,int yy){
         x=xx;
         y=yy;
+    }
+    
+    public void setCordinates(Point p){
+        x=(int)p.getX();
+        y=(int)p.getY();
     }
     //if a monster is not given a hp it will revert to its type's default
     public void setHp(int HP)
@@ -62,5 +74,17 @@ public class MonsterHolder implements Serializable
     
     public String getType(){
         return type;
+    }
+    
+    public void draw(Graphics g){
+        g.drawImage(monster,x*zoom*16+zoom,(y)*zoom*16,null);
+    }
+    
+    public static void updateZoom(){
+        zoom = CreatorDriver.getFrame().getZoom();
+    }
+    
+    public String toString(){
+        return type+"\t("+x+","+y+")\tHP:"+hp+"\tChannel"+channel;
     }
 }
