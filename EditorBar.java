@@ -23,6 +23,7 @@ public class EditorBar implements ActionListener,Runnable
     private JMenuItem leMenuItem;
     private JMenuItem trigMenuItem;
     private JMenuItem ssMenuItem;
+    private JMenuItem zzMenuItem;
     private JMenuItem seMenuItem;
     private JMenuItem mstMenuItem;
     private JMenuItem tsoMenuItem;
@@ -68,12 +69,15 @@ public class EditorBar implements ActionListener,Runnable
         indMenuItem = new JMenuItem("Hide Indicators");
         leMenuItem = new JMenuItem("Show Level Edges");
         ssMenuItem = new JMenuItem("Show Special Selector");
+        zzMenuItem = new JMenuItem("Snap to zoom");
         indMenuItem.addActionListener(this);
         leMenuItem.addActionListener(this);
         ssMenuItem.addActionListener(this);
+        zzMenuItem.addActionListener(this);
         viewMenu.add(indMenuItem);
         viewMenu.add(leMenuItem);
         viewMenu.add(ssMenuItem);
+        viewMenu.add(zzMenuItem);
 
         // build the Tools menu
         toolMenu = new JMenu("Tools");
@@ -107,6 +111,7 @@ public class EditorBar implements ActionListener,Runnable
         specMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S,ActionEvent.SHIFT_MASK));
         indMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_I, ActionEvent.CTRL_MASK));
         mstMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_M, ActionEvent.CTRL_MASK));
+        zzMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_I, ActionEvent.CTRL_MASK+ActionEvent.SHIFT_MASK));
         // put the menubar on the frame
         frame.setJMenuBar(menuBar);
     }
@@ -174,6 +179,9 @@ public class EditorBar implements ActionListener,Runnable
         }
         else if(action.equals("Break Down Tileset")){
             TilesetStuff.TilesetToTiles();
+        }
+        else if(action.equals("Snap to zoom")){
+            CreatorDriver.getFrame().getPanel().snapToZoom();
         }
     }
 

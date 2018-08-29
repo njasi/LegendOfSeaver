@@ -36,6 +36,7 @@ public class TestPanel extends JPanel
     public TestPanel()
     {
         zoom=CreatorDriver.getFrame().getZoom();
+        //snapToZoom();
         //addMouseListener(new MyMouseListener());
         setBackground(Color.white);
         addKeyListener(new KeyListenBoy());
@@ -63,6 +64,7 @@ public class TestPanel extends JPanel
     public TestPanel(int zoomV)
     {
         zoom=zoomV;
+        //snapToZoom();
         addMouseListener(new MyMouseListener());
         setBackground(Color.white);
         addKeyListener(new KeyListenBoy());
@@ -380,6 +382,10 @@ public class TestPanel extends JPanel
         return -1;
     }
 
+    public void snapToZoom(){
+        CreatorDriver.getFrame().setSize(417*zoom,262*zoom);
+    }
+
     private void updateZoom()//lets the window be resized and everything shrinks
     {
         Tile.updateZoom();
@@ -388,7 +394,6 @@ public class TestPanel extends JPanel
             TestFrame.changeW(CreatorDriver.getFrame().getWidth());
             TestFrame.changeH(CreatorDriver.getFrame().getHeight());
             zoom=CreatorDriver.getFrame().getZoom();
-            //CreatorDriver.getFrame().setSize(433*zoom,250*zoom);
         }
         catch(Exception e){}
         if(door.getWidth(null)/16!=zoom)

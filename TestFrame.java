@@ -29,7 +29,7 @@ public class TestFrame extends JFrame
         eb=new EditorBar(this);
 
         SwingUtilities.invokeLater(eb);
-        setMinimumSize(new Dimension(433,250));
+        setMinimumSize(new Dimension(417,262));
         setVisible(true);
     }
     
@@ -62,11 +62,11 @@ public class TestFrame extends JFrame
     {
         if(test)
         {
-            return (int)Math.ceil(Math.min(width/433,height/244))-c;
+            return (int)Math.ceil(Math.min(width/497,height/244))-c;
         }
         else
         {
-            return Math.min((int)width/256,(int)height/224);
+            return Math.min((int)width/256,(int)height/244);
         }
     }
 
