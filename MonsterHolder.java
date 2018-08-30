@@ -9,10 +9,11 @@ public class MonsterHolder implements Serializable
     static int zoom=CreatorDriver.getFrame().getZoom();
     String type;//type of monster
     int x,y,hp,channel;//channel if it will not appear at start, when channel is active they will appear
-    boolean appearsAtStart;//if false the thing is not present until channel turns active
+    boolean appearsAtStart=true;//if false the thing is not present until channel turns active
     public MonsterHolder(Image img)
     {
         monster=img;
+        appearsAtStart=true;
     }
     
     public MonsterHolder(Image img,String type)
@@ -86,5 +87,9 @@ public class MonsterHolder implements Serializable
     
     public String toString(){
         return type+"\t("+x+","+y+")\tHP:"+hp+"\tChannel"+channel;
+    }
+    
+    public boolean isAt(Point p){
+        return x==(int)p.getX()&&y==(int)p.getY();
     }
 }

@@ -5,12 +5,12 @@ import java.awt.event.*;
 import java.awt.image.*;
 import java.io.*;
 import javax.imageio.*;
-public class MonsterOptionPane extends JOptionPane{
+public class MonsterSearchPane extends JOptionPane{
     JComboBox<ImageIcon> results;
     String[] stringResults;
     File[] listOfFiles;
     JTextField searchBar = new JTextField("Search for monsters here (search png for a full list)");
-    public MonsterOptionPane()
+    public MonsterSearchPane()
     {
         super();
         File folder = new File("Images/Monsters");

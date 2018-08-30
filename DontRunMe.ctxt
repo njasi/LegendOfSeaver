@@ -1,6 +1,6 @@
 #BlueJ class context
 comment0.target=DontRunMe
-comment0.text=\r\n\ @SuppressWarnings("unchecked")\r\n
+comment0.text=\n\ @SuppressWarnings("unchecked")\n
 comment1.params=args
 comment1.target=void\ main(java.lang.String[])
 comment2.params=

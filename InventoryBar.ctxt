@@ -1,6 +1,7 @@
 #BlueJ class context
-comment0.params=
-comment0.target=InventoryBar()
-comment1.params=g\ h
-comment1.target=void\ draw(java.awt.Graphics,\ boolean)
-numComments=2
+comment0.target=InventoryBar
+comment1.params=
+comment1.target=InventoryBar()
+comment2.params=g\ h
+comment2.target=void\ draw(java.awt.Graphics,\ boolean)
+numComments=3

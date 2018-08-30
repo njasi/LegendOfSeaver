@@ -1018,17 +1018,37 @@ public class TestPanel extends JPanel
                         }
                     }
                     else if(bar.getStage()==4)//monster placing
-                    {
-                        MonsterHolder[] temp = new MonsterHolder[monsters.length+1];
-                        for(int i=0;i<monsters.length;i++){
-                            System.out.println(monsters[i]);
+                    {// edit monster below
+                        if (SwingUtilities.isRightMouseButton(e) ||(e.getModifiers() & ActionEvent.CTRL_MASK) ==ActionEvent.CTRL_MASK) {
+                            MonsterHolder[] toBeEdited= new MonsterHolder[0];
+                            int[] indices = new int[0];
+                            for(int i=0;i<monsters.length;i++){
+                                if(monsters[i].isAt(mover(false))){
+                                    MonsterHolder[] temp = new MonsterHolder[toBeEdited.length+1];
+                                    int[] tempi=new int[indices.length+1];
+                                    for(int j=0;j<toBeEdited.length;j++){
+                                        temp[j]=toBeEdited[j];
+                                        tempi[j]=indices[j];
+                                    }
+                                    temp[temp.length-1]=monsters[i];
+                                    tempi[tempi.length-1]=i;
+                                    toBeEdited=temp;
+                                    indices=tempi;
+                                }
+                            }
+                            if(toBeEdited.length!=0){
+                                MonsterEditPane editor=new MonsterEditPane(toBeEdited,indices);
+                                editor.editMonster();
+                            }
+                        }else{//place monster
+                            MonsterHolder[] temp = new MonsterHolder[monsters.length+1];
+                            for(int i=0;i<monsters.length;i++){
+                                temp[i]=monsters[i];
+                            }
+                            temp[temp.length-1] = new MonsterHolder(monsterTypes[monNumb].getImage(),monsterTypes[monNumb].getType());
+                            temp[temp.length-1].setCordinates(mover(false));
+                            monsters=temp;
                         }
-                        for(int i=0;i<monsters.length;i++){
-                            temp[i]=monsters[i];
-                        }
-                        temp[temp.length-1] = new MonsterHolder(monsterTypes[monNumb].getImage(),monsterTypes[monNumb].getType());
-                        temp[temp.length-1].setCordinates(mover(false));
-                        monsters=temp;
                     }
                     else if(bar.getStage()==5)//special
                     {
