@@ -37,7 +37,11 @@ About The Level Editor:
         -To remove a door, click on it. This works while you are placing down multiple doors too
         
     Stage 4 Monsters(Shift+M):
-        W.I.P
+        Monsters are the monsters. come on I can't really make this any clearer.
+        -Click to place a monster.
+        -Press control+M to bring up a searchbar to find a monster. If you want to display all do a blank search
+        -control click on a monster (or stack of monsters) to edit their properties. You will also be given the option to
+         delete them.
         
     Stage 5 Special(Shift+S)
 
