@@ -1,0 +1,9 @@
+#BlueJ class context
+comment0.target=NameGrabber
+comment1.params=args
+comment1.target=void\ main(java.lang.String[])
+comment2.params=
+comment2.target=java.lang.String\ grabName()
+comment3.params=command
+comment3.target=java.lang.String\ executeCommand(java.lang.String)
+numComments=4

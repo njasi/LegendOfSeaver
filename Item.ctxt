@@ -2,8 +2,8 @@
 comment0.target=Item
 comment1.params=move\ amount\ iconName
 comment1.target=Item(boolean,\ int,\ java.lang.String)
-comment1.text=\n\ use\ this\ constructor\ if\ an\ item\ has\ a\ certain\ amount\ (like\ bombs)\n
+comment1.text=\r\n\ use\ this\ constructor\ if\ an\ item\ has\ a\ certain\ amount\ (like\ bombs)\r\n
 comment2.params=move\ iconName
 comment2.target=Item(boolean,\ java.lang.String)
-comment2.text=\n\ Use\ this\ constructor\ when\ an\ item\ has\ unlimited\ uses\n
+comment2.text=\r\n\ Use\ this\ constructor\ when\ an\ item\ has\ unlimited\ uses\r\n
 numComments=3
