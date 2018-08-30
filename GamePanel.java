@@ -13,6 +13,7 @@ public class GamePanel extends JPanel
     //test comment for git script on windows
     //Another comment
     //Last comment
+    //back to test comments
     private static Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
     private boolean w=false,a=false,s=false,d=false,showObs=false;//handles movement and stuff
     private int framesCount = 0,fps=0,x=0,dn=0,xm=0,ym=0,xs=0,ys=0,zoom=GameFrame.getZoom(),ext=GameFrame.extra(),wait=0,count=0;

@@ -1,11 +1,10 @@
 #BlueJ class context
-comment0.target=EditorBar
-comment1.params=frame
-comment1.target=EditorBar(javax.swing.JFrame)
-comment2.params=
-comment2.target=void\ run()
-comment3.params=event
-comment3.target=void\ actionPerformed(java.awt.event.ActionEvent)
-comment4.params=f
-comment4.target=void\ toggleEdges(boolean)
-numComments=5
+comment0.params=frame
+comment0.target=EditorBar(javax.swing.JFrame)
+comment1.params=
+comment1.target=void\ run()
+comment2.params=event
+comment2.target=void\ actionPerformed(java.awt.event.ActionEvent)
+comment3.params=f
+comment3.target=void\ toggleEdges(boolean)
+numComments=4
