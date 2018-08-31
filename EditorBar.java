@@ -174,7 +174,7 @@ public class EditorBar implements ActionListener,Runnable
             CreatorDriver.getFrame().getPanel().getSS().setVisible(true);
         }
         else if(action.equals("Monster Search")){
-            MonsterSearchPane chris= new MonsterSearchPane();
+            BigOptionPane chris= new BigOptionPane(true);
             CreatorDriver.getFrame().getPanel().setMonsterSelection(chris.search());
         }
         else if(action.equals("Break Down Tileset")){

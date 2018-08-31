@@ -603,7 +603,7 @@ public class SpecialSelector implements ActionListener
     }
     private class ChooseListen implements ActionListener//deals with most buttons
     {
-        ChannelOptionPane charles =new ChannelOptionPane();
+        BigOptionPane charles =new BigOptionPane(false);
         public void actionPerformed(ActionEvent a)
         {
             String action= a.getActionCommand();

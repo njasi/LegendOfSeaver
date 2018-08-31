@@ -1,9 +1,0 @@
-#BlueJ class context
-comment0.target=ChannelOptionPane
-comment1.params=
-comment1.target=ChannelOptionPane()
-comment2.params=
-comment2.target=int\ setChan()
-comment3.params=
-comment3.target=javax.swing.JPanel\ getPanel()
-numComments=4

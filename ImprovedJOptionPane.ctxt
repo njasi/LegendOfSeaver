@@ -1,9 +1,0 @@
-#BlueJ class context
-comment0.target=ImprovedJOptionPane
-comment1.params=
-comment1.target=ImprovedJOptionPane()
-comment2.params=s
-comment2.target=int\ showConfirmDialog(java.lang.String)
-comment3.params=s
-comment3.target=javax.swing.JPanel\ getPanel(java.lang.String)
-numComments=4

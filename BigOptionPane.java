@@ -221,6 +221,21 @@ public class BigOptionPane extends JOptionPane
 
         return panel;
     }
+    
+    public int setChan()
+    { 
+        int r = super.showConfirmDialog(null,getChannelPanel(),"Choose or Add a Channel",JOptionPane.OK_CANCEL_OPTION,JOptionPane.PLAIN_MESSAGE);
+        if(r==0){
+           return 1;
+        }
+        return -1;
+    }
+
+    private Component getChannelPanel() {
+        JPanel panel = new JPanel();
+        panel.add(CreatorDriver.getFrame().getPanel().getSS().channels());
+        return panel;
+    }
 
     private class MonsterActionListener implements ActionListener{
         public void actionPerformed(ActionEvent e){

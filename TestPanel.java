@@ -29,7 +29,7 @@ public class TestPanel extends JPanel
     ScreenPackage currentScreen,saver= new ScreenPackage();
     TestPanel it=this;
     JOptionPane lee= new JOptionPane();
-    ImprovedJOptionPane jasinski= new ImprovedJOptionPane();
+    BigOptionPane jasinski= new BigOptionPane(false);
     LevelEdges edger;
     SpecialSelector selectorSpecial= new SpecialSelector();
 
@@ -836,7 +836,7 @@ public class TestPanel extends JPanel
                                                 {
                                                     filer.showDialog(CreatorDriver.getFrame(),"Door to here?");
                                                     ss=filer.getSelectedFile().getPath();
-                                                    doit=jasinski.showConfirmDialog(STH.changeToUsableName(ss));
+                                                    doit=jasinski.showScreenConfirmDialog(STH.changeToUsableName(ss));
                                                     if(doit==2)
                                                     {
                                                         faded= new Point[0];
@@ -901,7 +901,7 @@ public class TestPanel extends JPanel
                                             {
                                                 filer.showDialog(CreatorDriver.getFrame(),"Door to here?");
                                                 ss=filer.getSelectedFile().getPath();
-                                                doit=jasinski.showConfirmDialog(STH.changeToUsableName(ss));
+                                                doit=jasinski.showScreenConfirmDialog(STH.changeToUsableName(ss));
                                                 if(doit==2)
                                                 {
                                                     faded= new Point[0];
@@ -1037,7 +1037,7 @@ public class TestPanel extends JPanel
                                 }
                             }
                             if(toBeEdited.length!=0){
-                                MonsterEditPane editor=new MonsterEditPane(toBeEdited,indices);
+                                BigOptionPane editor=new BigOptionPane(toBeEdited,indices);
                                 MonsterHolder[] changed = editor.editMonster();
                                 for(int i=0;i<changed.length;i++){
                                     monsters[indices[i]]=changed[i];
