@@ -51,8 +51,14 @@ TO DO:
 Obstructions:
     -add arrow obstruction which will be one way, like a wedge.
 
+monster Stuff:
+    -make editpane actually edit shit
+    -delete monsters
+    -make them saveable
+    -add facing options
+
 special stuff:
-    -monster and switch placement
+    -and switch placement
     -locked doors
     -switches
     -triggers

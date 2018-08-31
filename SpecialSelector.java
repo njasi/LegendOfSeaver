@@ -726,27 +726,4 @@ public class SpecialSelector implements ActionListener
             return "null";
         }
     }
-    public class ChannelOptionPane extends JOptionPane{
-        public ChannelOptionPane()
-        {
-            super();
-        }
-
-        public int setChan()
-        { 
-            return super.showConfirmDialog(
-                null,
-                getPanel(),
-                "Choose or Add a Channel",
-                JOptionPane.YES_NO_CANCEL_OPTION,
-                JOptionPane.PLAIN_MESSAGE);
-        }
-
-        private JPanel getPanel() {
-            JPanel panel = new JPanel();
-            panel.add(CreatorDriver.getFrame().getPanel().getSS().channels());
-
-            return panel;
-        }
-    }
 }

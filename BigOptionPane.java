@@ -1,3 +1,4 @@
+
 import java.util.*;
 import javax.swing.*;          
 import java.awt.*;
@@ -5,16 +6,22 @@ import java.awt.event.*;
 import java.awt.image.*;
 import java.io.*;
 import javax.imageio.*;
-public class MonsterEditPane extends JOptionPane{
+public class BigOptionPane extends JOptionPane
+{
     MonsterHolder[] info;
-    MonsterEditPane self=this;
+    BigOptionPane self=this;
     int[] indices;
     JTextField[] channels;
     JTextField[] hps;
     JCheckBox[] aas;
     JTabbedPane tabs= new JTabbedPane(JTabbedPane.TOP);
     ImageIcon no;
-    public MonsterEditPane(MonsterHolder[] toEdit,int[] is)
+
+    JComboBox<ImageIcon> results;
+    String[] stringResults;
+    File[] listOfFiles;
+    JTextField searchBar = new JTextField("Search for monsters here (search png for a full list)");
+    public BigOptionPane(MonsterHolder[] toEdit,int[] is)//For the monster editing stuff
     {
         super();
         info=toEdit;
@@ -26,6 +33,15 @@ public class MonsterEditPane extends JOptionPane{
             no=new ImageIcon(ImageIO.read(new File("images/tiles/border1.png")));
         }catch(Exception e){
             e.printStackTrace();
+        }
+    }
+
+    public BigOptionPane(boolean monster)//DoesMonsterSearch Stuff
+    {
+        super();
+        if(monster){
+            File folder = new File("Images/Monsters");
+            listOfFiles = folder.listFiles();
         }
     }
 
@@ -103,6 +119,109 @@ public class MonsterEditPane extends JOptionPane{
         holder.add(delete,gbc);
         return holder;
     }
+
+    public String search(){
+        return showConfirmDialog(showInputDialog(CreatorDriver.getFrame(),"What would you like to search for?"));
+    }
+
+    public int showScreenConfirmDialog(String s)
+    { 
+        return super.showConfirmDialog(
+            null,
+            getScreenImage(s),
+            "Put the door(s) on this screen?",
+            JOptionPane.YES_NO_CANCEL_OPTION,
+            JOptionPane.PLAIN_MESSAGE);
+    }
+    
+    public String showConfirmDialog(String s)
+    { 
+        if(s.length()==0){
+            s=".png";
+        }
+        int i=1;
+        try{
+            i=super.showConfirmDialog(null,getList(s),"Choose a result",JOptionPane.OK_CANCEL_OPTION,JOptionPane.PLAIN_MESSAGE);
+        }catch(Exception e){
+            System.out.println("oof");
+        }
+        if(results.getSelectedItem().equals("There were no results, sorry."))
+        {
+            return null;
+        }
+        if(i==0)
+        {
+            return stringResults[results.getSelectedIndex()];
+        }
+        else{
+            return null;
+        }
+        //return results.getSelectedItem();
+    }
+
+    private JPanel getList(String s){
+        JPanel holder=new JPanel();
+        stringResults=filesToStringArray(listOfFiles,s);
+        try{
+            results= new JComboBox<ImageIcon>(stringArrayToImageIconArray(stringResults));
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        holder.add(results);
+        return holder;
+    }
+
+    private String[] filesToStringArray(File[] stuff,String search)
+    {   
+        String[] returner= new String[1];
+        ArrayList<String> boi= new ArrayList<String>();
+        for(int i=0;i<stuff.length;i++)
+        {
+            String s=stuff[i].getName();
+            if(s.toLowerCase().indexOf(search.toLowerCase())!=-1)
+            {
+                boi.add(s.substring(0,s.length()-4));
+            }
+        }
+        if(boi.size()!=0){
+            returner= new String[boi.size()];
+            for(int i=0;i<returner.length;i++)
+            {
+                returner[i]=boi.get(i);
+            }
+        }
+        else
+        {
+            returner[0]="There were no results, sorry.";
+        }
+        searchBar = new JTextField("Search for monsters here (search png for a full list)");
+        return returner;
+    }
+
+    private ImageIcon[] stringArrayToImageIconArray(String[] names) throws Exception{
+        ImageIcon[] images= new ImageIcon[names.length];
+        for(int i=0;i<images.length;i++){
+            images[i]= new ImageIcon(ImageIO.read(new File("Images/Monsters/"+names[i]+".png")));
+        }
+        return images;
+    }
+
+    private Component getScreenImage(String s) {
+        JPanel panel = new JPanel();
+        JLabel label = new JLabel();
+        ImageIcon image = null;
+        try {
+            image = new ImageIcon(ImageIO.read(new File("Images/Screens/"+s+".png")));
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
+
+        label.setIcon(image);
+        panel.add(label);
+
+        return panel;
+    }
+
     private class MonsterActionListener implements ActionListener{
         public void actionPerformed(ActionEvent e){
             int index=tabs.getSelectedIndex();

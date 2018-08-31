@@ -1020,7 +1020,7 @@ public class TestPanel extends JPanel
                     else if(bar.getStage()==4)//monster placing
                     {// edit monster below
                         if (SwingUtilities.isRightMouseButton(e) ||(e.getModifiers() & ActionEvent.CTRL_MASK) ==ActionEvent.CTRL_MASK) {
-                            MonsterHolder[] toBeEdited= new MonsterHolder[0];
+                            MonsterHolder[] toBeEdited= new MonsterHolder[0];//edit monster after placing 
                             int[] indices = new int[0];
                             for(int i=0;i<monsters.length;i++){
                                 if(monsters[i].isAt(mover(false))){
@@ -1038,7 +1038,24 @@ public class TestPanel extends JPanel
                             }
                             if(toBeEdited.length!=0){
                                 MonsterEditPane editor=new MonsterEditPane(toBeEdited,indices);
-                                editor.editMonster();
+                                MonsterHolder[] changed = editor.editMonster();
+                                for(int i=0;i<changed.length;i++){
+                                    monsters[indices[i]]=changed[i];
+                                }
+                                
+                                MonsterHolder[] tempBoi= new MonsterHolder[monsters.length];//deals with deleted things
+                                int deleted=0;
+                                for(int i=0;i<monsters.length;i++){
+                                    if(monsters[i]==null){
+                                        deleted++;
+                                    }else{
+                                        tempBoi[i-deleted]=monsters[i];
+                                    }
+                                }
+                                monsters=new MonsterHolder[monsters.length-deleted];
+                                for(int i=0;i<monsters.length;i++){
+                                    monsters[i]=tempBoi[i];
+                                }
                             }
                         }else{//place monster
                             MonsterHolder[] temp = new MonsterHolder[monsters.length+1];
