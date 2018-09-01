@@ -1,7 +1,7 @@
 #BlueJ class context
 comment0.target=ScreenPackage
-comment1.params=tiles\ obstructions\ decorations\ d\ s\ doo
-comment1.target=ScreenPackage(Screen,\ Screen,\ Screen,\ Door[],\ java.lang.String,\ int)
+comment1.params=tiles\ obstructions\ decorations\ d\ s\ doo\ mon\ chan
+comment1.target=ScreenPackage(Screen,\ Screen,\ Screen,\ Door[],\ java.lang.String,\ int,\ MonsterHolder[],\ javax.swing.JTable)
 comment10.params=
 comment10.target=int[][]\ getTilesR()
 comment11.params=
@@ -30,8 +30,8 @@ comment3.params=t\ r\ l\ b
 comment3.target=void\ setPlaces(java.lang.String,\ java.lang.String,\ java.lang.String,\ java.lang.String)
 comment4.params=
 comment4.target=void\ save()
-comment5.params=tiles\ obstructions\ decorations\ d\ doo\ n
-comment5.target=void\ save(Screen,\ Screen,\ Screen,\ Door[],\ int,\ java.lang.String)
+comment5.params=tiles\ obstructions\ decorations\ d\ doo\ n\ mon\ chan
+comment5.target=void\ save(Screen,\ Screen,\ Screen,\ Door[],\ int,\ java.lang.String,\ MonsterHolder[],\ javax.swing.JTable)
 comment6.params=s
 comment6.target=void\ load(java.lang.String)
 comment7.params=

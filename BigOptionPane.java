@@ -11,9 +11,9 @@ public class BigOptionPane extends JOptionPane
     MonsterHolder[] info;
     BigOptionPane self=this;
     int[] indices;
-    JTextField[] channels;
     JTextField[] hps;
     JCheckBox[] aas;
+    JButton[] channames;
     JTabbedPane tabs= new JTabbedPane(JTabbedPane.TOP);
     ImageIcon no;
 
@@ -27,8 +27,8 @@ public class BigOptionPane extends JOptionPane
         info=toEdit;
         indices=is;
         hps=new JTextField[is.length];
-        channels=new JTextField[is.length];
         aas=new JCheckBox[is.length];
+        channames=new JButton[is.length];
         try{
             no=new ImageIcon(ImageIO.read(new File("images/tiles/border1.png")));
         }catch(Exception e){
@@ -55,9 +55,9 @@ public class BigOptionPane extends JOptionPane
                     if(hps[i].getText().length()>0){
                         info[i].setHp(Integer.parseInt(hps[i].getText()));
                     }
-                    if(channels[i].getText().length()>0){
-                        info[i].setChannel(Integer.parseInt(channels[i].getText()));
-                    }
+                    String name=channames[i].getText();
+                    System.out.println(name.substring(name.length()-2,name.length()-1));
+                    info[i].setChannel(Integer.parseInt(name.substring(name.length()-2,name.length()-1)));
                 }else{
                     info[i]=null;
                 }
@@ -75,7 +75,7 @@ public class BigOptionPane extends JOptionPane
         return tabs;
     }
 
-    private Component getOneDisplay(MonsterHolder base,int i){//just for multiples later
+    private Component getOneDisplay(MonsterHolder base,int i){//makes one tab at a time
         JPanel holder=new JPanel(new GridBagLayout());
         holder.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
         GridBagConstraints gbc = new GridBagConstraints();
@@ -91,18 +91,25 @@ public class BigOptionPane extends JOptionPane
         gbc.gridx=0;
         holder.add(new JLabel(base.getType()),gbc);  
 
-        gbc.gridwidth=1;
+        gbc.gridwidth=2;
         gbc.gridy=2;
         gbc.gridx=0;
-        holder.add(new JLabel("Channel: "+base.getChannel()),gbc);
-        channels[i]=new JTextField("",5);
-        gbc.gridx=1;
-        holder.add(channels[i],gbc);
+        channames[i]=new JButton("Channel: "+CreatorDriver.getFrame().getPanel().getChannels().getValueAt(base.getChannel(), 1)+"("+base.getChannel()+")");
+        holder.add(channames[i],gbc);
+        channames[i].addActionListener(new ActionListener(){
+                public void actionPerformed(ActionEvent e){
+                    int result=setChannel();
+                    if(result!=-1){
+                        channames[i].setText("Channel: "+CreatorDriver.getFrame().getPanel().getChannels().getValueAt(result, 1)+" ("+result+")");
+                    }
+                }
+            });
 
         gbc.gridwidth=1;
         gbc.gridy=3;
         gbc.gridx=0;
         holder.add(new JLabel("HP: "+base.getHP()),gbc);
+
         gbc.gridx=1;
         hps[i]=new JTextField("",5);
         holder.add(hps[i],gbc);
@@ -120,10 +127,6 @@ public class BigOptionPane extends JOptionPane
         return holder;
     }
 
-    public String search(){
-        return showConfirmDialog(showInputDialog(CreatorDriver.getFrame(),"What would you like to search for?"));
-    }
-
     public int showScreenConfirmDialog(String s)
     { 
         return super.showConfirmDialog(
@@ -133,7 +136,15 @@ public class BigOptionPane extends JOptionPane
             JOptionPane.YES_NO_CANCEL_OPTION,
             JOptionPane.PLAIN_MESSAGE);
     }
-    
+
+    //for the searching
+    public String search(){
+        return showConfirmDialog(showInputDialog(CreatorDriver.getFrame(),"What would you like to search for?"));
+    }
+
+    /**
+     * shows search results
+     */
     public String showConfirmDialog(String s)
     { 
         if(s.length()==0){
@@ -159,6 +170,9 @@ public class BigOptionPane extends JOptionPane
         //return results.getSelectedItem();
     }
 
+    /**
+     * gets results list
+     */
     private JPanel getList(String s){
         JPanel holder=new JPanel();
         stringResults=filesToStringArray(listOfFiles,s);
@@ -189,8 +203,7 @@ public class BigOptionPane extends JOptionPane
             {
                 returner[i]=boi.get(i);
             }
-        }
-        else
+        }else
         {
             returner[0]="There were no results, sorry.";
         }
@@ -221,12 +234,13 @@ public class BigOptionPane extends JOptionPane
 
         return panel;
     }
-    
-    public int setChan()
+
+    //below deals with channel selection
+    public int setChannel()
     { 
         int r = super.showConfirmDialog(null,getChannelPanel(),"Choose or Add a Channel",JOptionPane.OK_CANCEL_OPTION,JOptionPane.PLAIN_MESSAGE);
         if(r==0){
-           return 1;
+            return CreatorDriver.getFrame().getPanel().getChannels().getSelectedRow();
         }
         return -1;
     }

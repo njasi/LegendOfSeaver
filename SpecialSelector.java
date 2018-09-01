@@ -16,9 +16,10 @@ public class SpecialSelector implements ActionListener
     File[] listOfFiles;
     JTabbedPane tabs= new JTabbedPane(JTabbedPane.TOP);
     TrigListen dude= new TrigListen();
-    JTable chanboi=new JTable(new DefaultTableModel(new String[]{"Channel Number", "Description"},0));
-    public SpecialSelector()
+    JTable table;
+    public SpecialSelector(JTable given)
     {
+        table=given;
         frame= new JFrame("Special Stuff");
         getFileList();
         addChannel("All Monsters Killed");
@@ -406,7 +407,7 @@ public class SpecialSelector implements ActionListener
         int gridy = 0;
         JButton meh=new JButton("Add Channel");
         meh.addActionListener(new Channels());
-        addComponent(tempboi, new JScrollPane(chanboi), 0, gridy++, 1, 1, 1D, 4D,GridBagConstraints.CENTER, GridBagConstraints.BOTH);
+        addComponent(tempboi, new JScrollPane(table), 0, gridy++, 1, 1, 1D, 4D,GridBagConstraints.CENTER, GridBagConstraints.BOTH);
         addComponent(tempboi, meh, 0, gridy++, 1, 1, 1D, 1D,GridBagConstraints.CENTER, GridBagConstraints.BOTH);
         return tempboi;
     }
@@ -423,7 +424,7 @@ public class SpecialSelector implements ActionListener
      */
     public void addChannel(String stuffToAdd)
     {
-        DefaultTableModel inside =(DefaultTableModel)chanboi.getModel();//get model
+        DefaultTableModel inside =(DefaultTableModel)table.getModel();//get model
         inside.addRow(new String[]{""+inside.getRowCount(),stuffToAdd});
     }
 
@@ -618,7 +619,7 @@ public class SpecialSelector implements ActionListener
                     }
                     else if(action.equals("Receive Channel"))
                     {
-                        charles.setChan();
+                        charles.setChannel();
                     }
                 }
                 else if(tab.equals("Switches"))

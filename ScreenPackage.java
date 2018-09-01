@@ -21,7 +21,9 @@ public class ScreenPackage implements Serializable
     int[][] decor;
     int howManyDoors;
     String name,top,right,left,bottom;
-    public ScreenPackage(Screen tiles, Screen obstructions, Screen decorations,Door[] d,String s,int doo)
+    //MonsterHolder[] monsters;
+    //JTable channels;
+    public ScreenPackage(Screen tiles, Screen obstructions, Screen decorations,Door[] d,String s,int doo,MonsterHolder[] mon,JTable chan)
     {
         name=s;
         t=tiles.toStringArray();
@@ -36,6 +38,8 @@ public class ScreenPackage implements Serializable
             doors[i]=d[i].toString();
         }
         howManyDoors=doo;
+        //monsters=mon;
+        //channels=chan;
     }
 
     public ScreenPackage()
@@ -69,7 +73,7 @@ public class ScreenPackage implements Serializable
         }
     }
 
-    public void save(Screen tiles, Screen obstructions,Screen decorations,Door[] d,int doo,String n)
+    public void save(Screen tiles, Screen obstructions,Screen decorations,Door[] d,int doo,String n,MonsterHolder[] mon,JTable chan)
     {
         t=tiles.toStringArray();
         o=obstructions.toStringArray();
@@ -78,6 +82,8 @@ public class ScreenPackage implements Serializable
         decor=decorations.rotationArray();
         deco=decorations.toStringArray();
         doors=new String[d.length];
+        //monsters=mon;
+        //channels=chan;
         name=n;
         for(int i=0;i<d.length;i++)
         {
@@ -124,6 +130,10 @@ public class ScreenPackage implements Serializable
             left=((ScreenPackage)oss.readObject()).getLeft();
             oss = new ObjectInputStream(new FileInputStream(new File(s)));
             bottom=((ScreenPackage)oss.readObject()).getBottom();
+            oss = new ObjectInputStream(new FileInputStream(new File(s)));
+            //monsters=((ScreenPackage)oss.readObject()).getMonsters();
+            oss = new ObjectInputStream(new FileInputStream(new File(s)));
+            //channels=((ScreenPackage)oss.readObject()).getChannels();
             ois.close();
             oss.close();
         }
@@ -202,4 +212,14 @@ public class ScreenPackage implements Serializable
     {
         return bottom;
     }
+    /*
+    public MonsterHolder[] getMonsters()
+    {
+        return monsters;
+    }
+
+    public JTable getChannels()
+    {
+        return channels;
+    }*/
 }

@@ -120,7 +120,7 @@ public class GamePanel extends JPanel
     }
 
     /**used to load screens for now, just temporary*/
-    public void load(ScreenPackage stuff)
+    public void load(ScreenPackage stuff)//DONT FORGET TO ADD MONSTERS IN LATER TO THE LOADING HERE
     {
         levelName=stuff.getName();
         changeScreen(STH.changeToUsableName(levelName));

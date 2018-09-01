@@ -175,7 +175,10 @@ public class EditorBar implements ActionListener,Runnable
         }
         else if(action.equals("Monster Search")){
             BigOptionPane chris= new BigOptionPane(true);
-            CreatorDriver.getFrame().getPanel().setMonsterSelection(chris.search());
+            String returner=chris.search();
+            System.out.println(returner);
+            if(!returner.equals(""))
+                CreatorDriver.getFrame().getPanel().setMonsterSelection(returner);
         }
         else if(action.equals("Break Down Tileset")){
             TilesetStuff.TilesetToTiles();
