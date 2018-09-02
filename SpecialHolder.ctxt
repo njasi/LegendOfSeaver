@@ -1,0 +1,8 @@
+#BlueJ class context
+comment0.target=SpecialHolder
+comment0.text=\n\ Does\ the\ same\ shit\ as\ monster\ holder\ except\ this\ is\ for\ the\ switches\ and\ chests\ and\ things.\n
+comment1.params=type
+comment1.target=SpecialHolder(java.lang.String)
+comment2.params=tobe
+comment2.target=void\ setChannel(int)
+numComments=3

@@ -61,7 +61,6 @@ public class TestPanel extends JPanel
         LevelEdges.setPlaces("empty","empty","empty","empty","empty");
         edger= new LevelEdges();
         loadMonsters();
-        selectorSpecial= new SpecialSelector(chanboi);
     }
 
     public TestPanel(int zoomV)
@@ -84,7 +83,6 @@ public class TestPanel extends JPanel
         catch(Exception e)
         {}
         loadMonsters();
-        selectorSpecial= new SpecialSelector(chanboi);
     }
 
     public void paintComponent(Graphics g)
@@ -461,7 +459,7 @@ public class TestPanel extends JPanel
                         if(s!=null&&!s.equals(""))
                         {
                             test.writeToPNG(s,deco);
-                            saver=new ScreenPackage(test,obs,deco,doors,s,dn,monsters,chanboi);
+                            saver=new ScreenPackage(test,obs,deco,doors,s,dn,monsters,chanboi,null);//fix this later
                             saver.setPlaces(tops,rights,lefts,bottoms);
                             saver.save();
                             booo=false;
@@ -514,7 +512,7 @@ public class TestPanel extends JPanel
         lefts=stuff.getLeft();
         bottoms=stuff.getBottom();
         LevelEdges.setPlaces(tops,rights,levelName,lefts,bottoms);
-        //chanboi=stuff.getChannels();
+        chanboi= new JTable(stuff.getTableData(),new String[]{"Channel Number", "Description"});
         //monsters=stuff.getMonsters();
         edger.kill();
         edger= new LevelEdges();
@@ -559,7 +557,7 @@ public class TestPanel extends JPanel
                 test.writeToPNG(s,deco);
                 levelName=s;
                 saver.setPlaces(tops,rights,lefts,bottoms);
-                saver.save(test,obs,deco,doors,dn,s,monsters,chanboi);
+                saver.save(test,obs,deco,doors,dn,s,monsters,chanboi,null);//fix this later
             }
         }
         else
@@ -570,7 +568,7 @@ public class TestPanel extends JPanel
                 test.writeToPNG(STH.changeToUsableName(levelName),deco);
                 levelName=STH.changeToUsableName(levelName);
                 saver.setPlaces(tops,rights,lefts,bottoms);
-                saver.save(test,obs,deco,doors,dn,STH.changeToUsableName(levelName),monsters,chanboi);
+                saver.save(test,obs,deco,doors,dn,STH.changeToUsableName(levelName),monsters,chanboi,null);//fix this later
             }
         }
     }
@@ -587,7 +585,38 @@ public class TestPanel extends JPanel
 
     public SpecialSelector getSS()
     {
+        selectorSpecial= new SpecialSelector(chanboi);
         return selectorSpecial;
+    }
+
+    public Component channels()
+    {
+        JPanel tempboi= new JPanel();
+        tempboi.setLayout(new GridBagLayout());
+        int gridy = 0;
+        JButton meh=new JButton("Add Channel");
+        meh.addActionListener(new ActionListener()//add channels and see when they change
+            {
+                public void actionPerformed(ActionEvent a)
+                {
+                    String action= a.getActionCommand();
+                    if(action.equals("Add Channel"))
+                    {
+                        CreatorDriver.getFrame().getPanel().getSS().addChannel("Click to edit");
+                    }
+                }
+            });
+        chanboi=CreatorDriver.getFrame().getPanel().getChannels();
+        addComponent(tempboi, new JScrollPane(chanboi), 0, gridy++, 1, 1, 1D, 4D,GridBagConstraints.CENTER, GridBagConstraints.BOTH);
+        addComponent(tempboi, meh, 0, gridy++, 1, 1, 1D, 1D,GridBagConstraints.CENTER, GridBagConstraints.BOTH);
+        return tempboi;
+    }
+
+    private void addComponent(Container container, Component component,int gridx, int gridy, 
+    int gridwidth, int gridheight,double weightx, double weighty, int anchor, int fill)
+    {
+        GridBagConstraints gbc = new GridBagConstraints(gridx, gridy,gridwidth, gridheight, weightx, weighty, anchor, fill, new Insets(0, 0, 0, 0), 0, 0);
+        container.add(component, gbc);
     }
 
     private void FPS()
@@ -855,7 +884,7 @@ public class TestPanel extends JPanel
                                                         return;
                                                     }
                                                 }
-                                                currentScreen = new ScreenPackage(test,obs,deco,doors,levelName,dn,monsters,chanboi);//This holds the screen until you're done placing the door
+                                                currentScreen = new ScreenPackage(test,obs,deco,doors,levelName,dn,monsters,chanboi,null);//fix this later //This holds the screen until you're done placing the door
                                                 saver.load(ss);
                                                 saver.changeName(ss);
                                                 faded= new Point[0];
@@ -919,7 +948,7 @@ public class TestPanel extends JPanel
                                                     return;
                                                 }
                                             }
-                                            currentScreen = new ScreenPackage(test,obs,deco,doors,levelName,dn,monsters,chanboi);//This holds the screen until you're done placing the door
+                                            currentScreen = new ScreenPackage(test,obs,deco,doors,levelName,dn,monsters,chanboi,null);//fix this later //This holds the screen until you're done placing the door
                                             saver.load(ss);
                                             saver.changeName(ss);
                                             it.load(saver);//see load method above *it = panel
@@ -987,7 +1016,7 @@ public class TestPanel extends JPanel
                                     String sn=ss;//saver.getName();
                                     it.addDoors(doorsTo,currentScreen.getName(),doorsFrom,0);//adds door on screen you went to
                                     saver.setPlaces(tops,rights,lefts,bottoms);
-                                    saver.save(test,obs,deco,doors,dn,STH.changeToUsableName(ss),monsters,chanboi);//saves the door on the screen you went to somthing is wronghere fix this
+                                    saver.save(test,obs,deco,doors,dn,STH.changeToUsableName(ss),monsters,chanboi,null);//fix this later //saves the door on the screen you went to somthing is wronghere fix this
                                     lee.showMessageDialog(TestFrame.getPanel(),"Returning to level...","Door Stuff",0);
                                     load(currentScreen);//returns you to the orginal screen
                                     it.addDoors(doorsFrom,sn,doorsTo,0);//adds the door on the first screen
@@ -1012,7 +1041,7 @@ public class TestPanel extends JPanel
                                         String sn=ss;//saver.getName();
                                         it.addDoor(doorTo,currentScreen.getName(),doorFrom,0);//adds door on screen you went to
                                         saver.setPlaces(tops,rights,lefts,bottoms);
-                                        saver.save(test,obs,deco,doors,dn,STH.changeToUsableName(ss),monsters,chanboi);//saves the door on the screen you went to somthing is wronghere fix this
+                                        saver.save(test,obs,deco,doors,dn,STH.changeToUsableName(ss),monsters,chanboi,null);//fix this later //saves the door on the screen you went to somthing is wronghere fix this
                                         lee.showMessageDialog(TestFrame.getPanel(),"Returning to level...","Door Stuff",0);
                                         load(currentScreen);//returns you to the orginal screen
                                         it.addDoor(doorFrom,sn,doorTo,0);//adds the door on the first screen
@@ -1303,7 +1332,6 @@ public class TestPanel extends JPanel
                     if(monNumb<0){
                         monNumb=monsterTypes.length-1;
                     }
-                    System.out.println("MN: "+monNumb);
                 }
             }
             else if(key==KeyEvent.VK_RIGHT)
@@ -1339,7 +1367,6 @@ public class TestPanel extends JPanel
                     if(monNumb==monsterTypes.length){
                         monNumb=0;
                     }
-                    System.out.println("MN: "+monNumb+"\tL: "+(monsterTypes.length-1));
                 }
             }
             else if(key==KeyEvent.VK_P)

@@ -56,7 +56,6 @@ public class BigOptionPane extends JOptionPane
                         info[i].setHp(Integer.parseInt(hps[i].getText()));
                     }
                     String name=channames[i].getText();
-                    System.out.println(name.substring(name.length()-2,name.length()-1));
                     info[i].setChannel(Integer.parseInt(name.substring(name.length()-2,name.length()-1)));
                 }else{
                     info[i]=null;
@@ -247,7 +246,7 @@ public class BigOptionPane extends JOptionPane
 
     private Component getChannelPanel() {
         JPanel panel = new JPanel();
-        panel.add(CreatorDriver.getFrame().getPanel().getSS().channels());
+        panel.add(CreatorDriver.getFrame().getPanel().channels());
         return panel;
     }
 

@@ -16,14 +16,15 @@ public class ScreenPackage implements Serializable
     String[][] o;
     String[][] deco;
     String[] doors;
+    String[] channels;
     int[][] tr;
     int[][] or;
     int[][] decor;
+    //MonsterHolder[] monsters;
+    SpecialHolder[] specials;
     int howManyDoors;
     String name,top,right,left,bottom;
-    //MonsterHolder[] monsters;
-    //JTable channels;
-    public ScreenPackage(Screen tiles, Screen obstructions, Screen decorations,Door[] d,String s,int doo,MonsterHolder[] mon,JTable chan)
+    public ScreenPackage(Screen tiles, Screen obstructions, Screen decorations,Door[] d,String s,int doo,MonsterHolder[] mon,JTable chan,SpecialHolder[] things)
     {
         name=s;
         t=tiles.toStringArray();
@@ -39,7 +40,11 @@ public class ScreenPackage implements Serializable
         }
         howManyDoors=doo;
         //monsters=mon;
-        //channels=chan;
+        channels= new String[chan.getRowCount()];
+        for(int i=0;i<chan.getRowCount();i++){
+            channels[i]=(String)chan.getValueAt(i,1);
+        }
+        specials=things;
     }
 
     public ScreenPackage()
@@ -73,7 +78,7 @@ public class ScreenPackage implements Serializable
         }
     }
 
-    public void save(Screen tiles, Screen obstructions,Screen decorations,Door[] d,int doo,String n,MonsterHolder[] mon,JTable chan)
+    public void save(Screen tiles, Screen obstructions,Screen decorations,Door[] d,int doo,String n,MonsterHolder[] mon,JTable chan,SpecialHolder[] things)
     {
         t=tiles.toStringArray();
         o=obstructions.toStringArray();
@@ -83,8 +88,12 @@ public class ScreenPackage implements Serializable
         deco=decorations.toStringArray();
         doors=new String[d.length];
         //monsters=mon;
-        //channels=chan;
+        channels= new String[chan.getRowCount()];
+        for(int i=0;i<chan.getRowCount();i++){
+            channels[i]=""+chan.getValueAt(i,1);
+        }
         name=n;
+        specials=things;
         for(int i=0;i<d.length;i++)
         {
             doors[i]=d[i].toString();
@@ -107,35 +116,23 @@ public class ScreenPackage implements Serializable
         try
         {
             ObjectInputStream ois = new ObjectInputStream(new FileInputStream(new File(s)));
-            t=((ScreenPackage)ois.readObject()).getTiles();
-            ObjectInputStream oss = new ObjectInputStream(new FileInputStream(new File(s)));
-            o=((ScreenPackage)oss.readObject()).getObs();
-            oss = new ObjectInputStream(new FileInputStream(new File(s)));
-            deco=((ScreenPackage)oss.readObject()).getDeco();
-            oss = new ObjectInputStream(new FileInputStream(new File(s)));
-            decor=((ScreenPackage)oss.readObject()).getDecoR();
-            oss = new ObjectInputStream(new FileInputStream(new File(s)));
-            tr=((ScreenPackage)oss.readObject()).getTilesR();
-            oss = new ObjectInputStream(new FileInputStream(new File(s)));
-            or=((ScreenPackage)oss.readObject()).getObsR();
-            oss = new ObjectInputStream(new FileInputStream(new File(s)));
-            doors=((ScreenPackage)oss.readObject()).getDoors();
-            oss = new ObjectInputStream(new FileInputStream(new File(s)));
-            howManyDoors=((ScreenPackage)oss.readObject()).howManyDoors();
-            oss = new ObjectInputStream(new FileInputStream(new File(s)));
-            top=((ScreenPackage)oss.readObject()).getTop();
-            oss = new ObjectInputStream(new FileInputStream(new File(s)));
-            right=((ScreenPackage)oss.readObject()).getRight();
-            oss = new ObjectInputStream(new FileInputStream(new File(s)));
-            left=((ScreenPackage)oss.readObject()).getLeft();
-            oss = new ObjectInputStream(new FileInputStream(new File(s)));
-            bottom=((ScreenPackage)oss.readObject()).getBottom();
-            oss = new ObjectInputStream(new FileInputStream(new File(s)));
-            //monsters=((ScreenPackage)oss.readObject()).getMonsters();
-            oss = new ObjectInputStream(new FileInputStream(new File(s)));
-            //channels=((ScreenPackage)oss.readObject()).getChannels();
+            ScreenPackage loading=(ScreenPackage)ois.readObject();
             ois.close();
-            oss.close();
+            t=loading.getTiles();
+            o=loading.getObs();
+            deco=loading.getDeco();
+            decor=loading.getDecoR();
+            tr=loading.getTilesR();
+            or=loading.getObsR();
+            doors=loading.getDoors();
+            howManyDoors=loading.howManyDoors();
+            top=loading.getTop();
+            right=loading.getRight();
+            left=loading.getLeft();
+            bottom=loading.getBottom();
+            //monsters=loading.getMonsters();
+            specials=loading.getSpecials();
+            channels=loading.getChannels();
         }
         catch(Exception e)
         {
@@ -212,14 +209,29 @@ public class ScreenPackage implements Serializable
     {
         return bottom;
     }
-    /*
-    public MonsterHolder[] getMonsters()
+
+    /*public MonsterHolder[] getMonsters()
     {
-        return monsters;
+    return monsters;
+    }*/
+
+    public SpecialHolder[] getSpecials()
+    {
+        return specials;
     }
 
-    public JTable getChannels()
+    public String[] getChannels()
     {
         return channels;
-    }*/
+    }
+    
+    public String[][] getTableData()
+    {
+        String[][] data=new String[channels.length][2];
+        for(int i=0;i<channels.length;i++){
+            data[i][0]=""+i;
+            data[i][1]=channels[i];
+        }
+        return data;
+    }
 }

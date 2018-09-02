@@ -52,7 +52,7 @@ public class SpecialSelector implements ActionListener
 
         tabs.add("Add Special",getAdderStuff());
         tabs.add("Triggers",triggers());
-        tabs.add("Channels",channels());
+        tabs.add("Channels",CreatorDriver.getFrame().getPanel().channels());
 
         return tabs;
     }
@@ -400,18 +400,6 @@ public class SpecialSelector implements ActionListener
         return pane;
     }
 
-    public Component channels()
-    {
-        JPanel tempboi= new JPanel();
-        tempboi.setLayout(new GridBagLayout());
-        int gridy = 0;
-        JButton meh=new JButton("Add Channel");
-        meh.addActionListener(new Channels());
-        addComponent(tempboi, new JScrollPane(table), 0, gridy++, 1, 1, 1D, 4D,GridBagConstraints.CENTER, GridBagConstraints.BOTH);
-        addComponent(tempboi, meh, 0, gridy++, 1, 1, 1D, 1D,GridBagConstraints.CENTER, GridBagConstraints.BOTH);
-        return tempboi;
-    }
-
     private void addComponent(Container container, Component component,int gridx, int gridy, 
     int gridwidth, int gridheight,double weightx, double weighty, int anchor, int fill)
     {
@@ -443,17 +431,6 @@ public class SpecialSelector implements ActionListener
         public void actionPerformed(ActionEvent a)
         {
             String action= a.getActionCommand();
-        }
-    }
-    private class Channels implements ActionListener//add channels and see when they change
-    {
-        public void actionPerformed(ActionEvent a)
-        {
-            String action= a.getActionCommand();
-            if(action.equals("Add Channel"))
-            {
-                CreatorDriver.getFrame().getPanel().getSS().addChannel("Click to edit");
-            }
         }
     }
     private class TrigListen implements ActionListener//deals with most checkboxes
