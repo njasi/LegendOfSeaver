@@ -56,7 +56,9 @@ public class BigOptionPane extends JOptionPane
                         info[i].setHp(Integer.parseInt(hps[i].getText()));
                     }
                     String name=channames[i].getText();
-                    info[i].setChannel(Integer.parseInt(name.substring(name.length()-2,name.length()-1)));
+                    String num=name.substring(name.length()-2,name.length()-1);
+                    if(!num.equals("n"))
+                        info[i].setChannel(Integer.parseInt(num));
                 }else{
                     info[i]=null;
                 }
@@ -93,7 +95,11 @@ public class BigOptionPane extends JOptionPane
         gbc.gridwidth=2;
         gbc.gridy=2;
         gbc.gridx=0;
-        channames[i]=new JButton("Channel: "+CreatorDriver.getFrame().getPanel().getChannels().getValueAt(base.getChannel(), 1)+"("+base.getChannel()+")");
+        if(base.getChannel()!=-1){
+            channames[i]=new JButton("Channel: "+CreatorDriver.getFrame().getPanel().getChannels().getValueAt(base.getChannel(), 1)+"("+base.getChannel()+")");
+        }else{
+            channames[i]=new JButton("Channel: None");
+        }
         holder.add(channames[i],gbc);
         channames[i].addActionListener(new ActionListener(){
                 public void actionPerformed(ActionEvent e){
@@ -246,7 +252,7 @@ public class BigOptionPane extends JOptionPane
 
     private Component getChannelPanel() {
         JPanel panel = new JPanel();
-        panel.add(CreatorDriver.getFrame().getPanel().channels());
+        panel.add(CreatorDriver.getFrame().getPanel().getSS().channels());
         return panel;
     }
 

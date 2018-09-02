@@ -16,10 +16,9 @@ public class SpecialSelector implements ActionListener
     File[] listOfFiles;
     JTabbedPane tabs= new JTabbedPane(JTabbedPane.TOP);
     TrigListen dude= new TrigListen();
-    JTable table;
-    public SpecialSelector(JTable given)
+    JTable chanboi=new JTable(new DefaultTableModel(new String[]{"Channel Number", "Description"},0));
+    public SpecialSelector()
     {
-        table=given;
         frame= new JFrame("Special Stuff");
         getFileList();
         addChannel("All Monsters Killed");
@@ -52,7 +51,6 @@ public class SpecialSelector implements ActionListener
 
         tabs.add("Add Special",getAdderStuff());
         tabs.add("Triggers",triggers());
-        tabs.add("Channels",CreatorDriver.getFrame().getPanel().channels());
 
         return tabs;
     }
@@ -400,6 +398,18 @@ public class SpecialSelector implements ActionListener
         return pane;
     }
 
+    public Component channels()
+    {
+        JPanel tempboi= new JPanel();
+        tempboi.setLayout(new GridBagLayout());
+        int gridy = 0;
+        JButton meh=new JButton("Add Channel");
+        meh.addActionListener(new Channels());
+        addComponent(tempboi, new JScrollPane(chanboi), 0, gridy++, 1, 1, 1D, 4D,GridBagConstraints.CENTER, GridBagConstraints.BOTH);
+        addComponent(tempboi, meh, 0, gridy++, 1, 1, 1D, 1D,GridBagConstraints.CENTER, GridBagConstraints.BOTH);
+        return tempboi;
+    }
+
     private void addComponent(Container container, Component component,int gridx, int gridy, 
     int gridwidth, int gridheight,double weightx, double weighty, int anchor, int fill)
     {
@@ -412,8 +422,16 @@ public class SpecialSelector implements ActionListener
      */
     public void addChannel(String stuffToAdd)
     {
-        DefaultTableModel inside =(DefaultTableModel)table.getModel();//get model
+        DefaultTableModel inside =(DefaultTableModel)chanboi.getModel();//get model
         inside.addRow(new String[]{""+inside.getRowCount(),stuffToAdd});
+    }
+    
+    public JTable getChannelsTable(){
+        return chanboi;
+    }
+    
+    public void setChannelsTable(JTable in){
+        chanboi =in;
     }
 
     public String getSelectedTab()
@@ -431,6 +449,17 @@ public class SpecialSelector implements ActionListener
         public void actionPerformed(ActionEvent a)
         {
             String action= a.getActionCommand();
+        }
+    }
+    private class Channels implements ActionListener//add channels and see when they change
+    {
+        public void actionPerformed(ActionEvent a)
+        {
+            String action= a.getActionCommand();
+            if(action.equals("Add Channel"))
+            {
+                CreatorDriver.getFrame().getPanel().getSS().addChannel("Click to edit");
+            }
         }
     }
     private class TrigListen implements ActionListener//deals with most checkboxes

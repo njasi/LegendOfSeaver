@@ -8,7 +8,7 @@ public class MonsterHolder implements Serializable
     private Image monster;
     static int zoom=CreatorDriver.getFrame().getZoom();
     String type;//type of monster
-    int x,y,hp,channel;//channel if it will not appear at start, when channel is active they will appear
+    int x,y,hp,channel=-1;//channel if it will not appear at start, when channel is active they will appear
     boolean appearsAtStart=true;//if false the thing is not present until channel turns active
     public MonsterHolder(Image img)
     {
