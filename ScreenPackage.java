@@ -20,7 +20,7 @@ public class ScreenPackage implements Serializable
     int[][] tr;
     int[][] or;
     int[][] decor;
-    //MonsterHolder[] monsters;
+    MonsterHolder[] monsters;
     SpecialHolder[] specials;
     int howManyDoors;
     String name,top,right,left,bottom;
@@ -39,7 +39,7 @@ public class ScreenPackage implements Serializable
             doors[i]=d[i].toString();
         }
         howManyDoors=doo;
-        //monsters=mon;
+        monsters=mon;
         channels= new String[chan.getRowCount()];
         for(int i=0;i<chan.getRowCount();i++){
             channels[i]=(String)chan.getValueAt(i,1);
@@ -87,7 +87,7 @@ public class ScreenPackage implements Serializable
         decor=decorations.rotationArray();
         deco=decorations.toStringArray();
         doors=new String[d.length];
-        //monsters=mon;
+        monsters=mon;
         channels= new String[chan.getRowCount()];
         for(int i=0;i<chan.getRowCount();i++){
             channels[i]=""+chan.getValueAt(i,1);
@@ -130,7 +130,7 @@ public class ScreenPackage implements Serializable
             right=loading.getRight();
             left=loading.getLeft();
             bottom=loading.getBottom();
-            //monsters=loading.getMonsters();
+            monsters=loading.getMonsters();
             specials=loading.getSpecials();
             channels=loading.getChannels();
         }
@@ -210,10 +210,10 @@ public class ScreenPackage implements Serializable
         return bottom;
     }
 
-    /*public MonsterHolder[] getMonsters()
+    public MonsterHolder[] getMonsters()
     {
-    return monsters;
-    }*/
+        return monsters;
+    }
 
     public SpecialHolder[] getSpecials()
     {
@@ -224,7 +224,7 @@ public class ScreenPackage implements Serializable
     {
         return channels;
     }
-    
+
     public String[][] getTableData()
     {
         String[][] data=new String[channels.length][2];

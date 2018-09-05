@@ -1,0 +1,15 @@
+#BlueJ class context
+comment0.target=MonsterOptionPane
+comment1.params=
+comment1.target=MonsterOptionPane()
+comment2.params=
+comment2.target=java.lang.String\ search()
+comment3.params=s
+comment3.target=java.lang.String\ showConfirmDialog(java.lang.String)
+comment4.params=s
+comment4.target=javax.swing.JPanel\ getList(java.lang.String)
+comment5.params=stuff\ search
+comment5.target=java.lang.String[]\ filesToStringArray(java.io.File[],\ java.lang.String)
+comment6.params=names
+comment6.target=javax.swing.ImageIcon[]\ stringArrayToImageIconArray(java.lang.String[])
+numComments=7
