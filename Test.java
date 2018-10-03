@@ -33,7 +33,6 @@ public class Test
                 }
             }
         }
-        System.out.println("Deleted a file.");
         return (path.delete());
     }
 }

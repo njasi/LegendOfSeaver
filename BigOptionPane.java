@@ -57,8 +57,9 @@ public class BigOptionPane extends JOptionPane
                     }
                     String name=channames[i].getText();
                     String num=name.substring(name.length()-2,name.length()-1);
-                    if(!num.equals("n"))
+                    if(!num.equals("n")){
                         info[i].setChannel(Integer.parseInt(num));
+                    }
                 }else{
                     info[i]=null;
                 }

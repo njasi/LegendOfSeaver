@@ -52,8 +52,6 @@ Obstructions:
     -add arrow obstruction which will be one way, like a wedge.
 
 monster Stuff:
-    -make editpane actually edit shit
-    -delete monsters
     -make them saveable
     -add facing options
 
